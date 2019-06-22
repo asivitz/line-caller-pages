@@ -4,12 +4,6 @@ body {
   font-weight: bold;
 }
 
-button {
-  font-family: "Gill Sans", sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-}
-
 .divided-list {
   display: flex;
   flex-direction: row;
@@ -21,7 +15,6 @@ button {
   padding: 0.3em;
   margin: 0.5em 0.3em;
   cursor: pointer;
-  border: 0;
 }
 
 #buttons {

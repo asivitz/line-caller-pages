@@ -5057,8 +5057,6 @@ var Gizra$elm_all_set$EverySet$size = function (_n0) {
 	var d = _n0.a;
 	return pzp1997$assoc_list$AssocList$size(d);
 };
-var author$project$Messages$TheyScored = {$: 'TheyScored'};
-var author$project$Messages$WeScored = {$: 'WeScored'};
 var elm$core$List$map = F2(
 	function (f, xs) {
 		return A3(
@@ -5209,21 +5207,16 @@ var author$project$Model$encode = F2(
 					])));
 	});
 var author$project$Update$save = _Platform_outgoingPort('save', elm$json$Json$Encode$string);
-var elm$core$Platform$Cmd$batch = _Platform_batch;
-var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
-var author$project$Update$saveToStorage = F2(
-	function (msg, model) {
-		return _Utils_Tuple2(
-			model,
-			(_Utils_eq(msg, author$project$Messages$WeScored) || _Utils_eq(msg, author$project$Messages$TheyScored)) ? author$project$Update$save(
-				A2(author$project$Model$encode, 2, model)) : elm$core$Platform$Cmd$none);
-	});
+var author$project$Update$saveToStorage = function (model) {
+	return _Utils_Tuple2(
+		model,
+		author$project$Update$save(
+			A2(author$project$Model$encode, 2, model)));
+};
 var elm$core$Basics$not = _Basics_not;
 var author$project$Update$update = F2(
 	function (msg, model) {
-		return A2(
-			author$project$Update$saveToStorage,
-			msg,
+		return author$project$Update$saveToStorage(
 			function () {
 				switch (msg.$) {
 					case 'PickPlayer':
@@ -5352,7 +5345,9 @@ var author$project$Messages$FlipGender = {$: 'FlipGender'};
 var author$project$Messages$PickPlayer = function (a) {
 	return {$: 'PickPlayer', a: a};
 };
+var author$project$Messages$TheyScored = {$: 'TheyScored'};
 var author$project$Messages$UndoPoint = {$: 'UndoPoint'};
+var author$project$Messages$WeScored = {$: 'WeScored'};
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
 var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
@@ -5367,7 +5362,7 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
-var elm$html$Html$button = _VirtualDom_node('button');
+var elm$html$Html$div = _VirtualDom_node('div');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$html$Html$Attributes$stringProperty = F2(
@@ -5398,7 +5393,7 @@ var elm$html$Html$Events$onClick = function (msg) {
 var author$project$View$renderButton = F2(
 	function (txt, msg) {
 		return A2(
-			elm$html$Html$button,
+			elm$html$Html$div,
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class('button'),
@@ -5568,7 +5563,7 @@ var author$project$View$renderPlayer = F3(
 		var opac = (twoPointCount === 2) ? '0.25' : ((onePointCount === 1) ? '0.4' : ((twoPointCount === 1) ? '0.60' : '1'));
 		var col = _Utils_eq(p.gender, author$project$Model$Male) ? 'rgb(128,196,239)' : 'rgb(252,198,255)';
 		return A2(
-			elm$html$Html$button,
+			elm$html$Html$div,
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class('player'),
@@ -5585,7 +5580,6 @@ var author$project$View$renderPlayer = F3(
 					elm$html$Html$text(p.name)
 				]));
 	});
-var elm$html$Html$div = _VirtualDom_node('div');
 var author$project$View$renderPlayerList = F3(
 	function (points, msg, ps) {
 		var os = A2(
@@ -6089,6 +6083,8 @@ var elm$url$Url$fromString = function (str) {
 		A2(elm$core$String$dropLeft, 8, str)) : elm$core$Maybe$Nothing);
 };
 var elm$browser$Browser$element = _Browser_element;
+var elm$core$Platform$Cmd$batch = _Platform_batch;
+var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var elm$core$Result$withDefault = F2(
 	function (def, result) {
 		if (result.$ === 'Ok') {
