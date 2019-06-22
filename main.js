@@ -5057,6 +5057,8 @@ var Gizra$elm_all_set$EverySet$size = function (_n0) {
 	var d = _n0.a;
 	return pzp1997$assoc_list$AssocList$size(d);
 };
+var author$project$Messages$TheyScored = {$: 'TheyScored'};
+var author$project$Messages$WeScored = {$: 'WeScored'};
 var elm$core$List$map = F2(
 	function (f, xs) {
 		return A3(
@@ -5207,16 +5209,21 @@ var author$project$Model$encode = F2(
 					])));
 	});
 var author$project$Update$save = _Platform_outgoingPort('save', elm$json$Json$Encode$string);
-var author$project$Update$saveToStorage = function (model) {
-	return _Utils_Tuple2(
-		model,
-		author$project$Update$save(
-			A2(author$project$Model$encode, 2, model)));
-};
+var elm$core$Platform$Cmd$batch = _Platform_batch;
+var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
+var author$project$Update$saveToStorage = F2(
+	function (msg, model) {
+		return _Utils_Tuple2(
+			model,
+			(_Utils_eq(msg, author$project$Messages$WeScored) || _Utils_eq(msg, author$project$Messages$TheyScored)) ? author$project$Update$save(
+				A2(author$project$Model$encode, 2, model)) : elm$core$Platform$Cmd$none);
+	});
 var elm$core$Basics$not = _Basics_not;
 var author$project$Update$update = F2(
 	function (msg, model) {
-		return author$project$Update$saveToStorage(
+		return A2(
+			author$project$Update$saveToStorage,
+			msg,
 			function () {
 				switch (msg.$) {
 					case 'PickPlayer':
@@ -5345,9 +5352,7 @@ var author$project$Messages$FlipGender = {$: 'FlipGender'};
 var author$project$Messages$PickPlayer = function (a) {
 	return {$: 'PickPlayer', a: a};
 };
-var author$project$Messages$TheyScored = {$: 'TheyScored'};
 var author$project$Messages$UndoPoint = {$: 'UndoPoint'};
-var author$project$Messages$WeScored = {$: 'WeScored'};
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
 var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
@@ -6084,8 +6089,6 @@ var elm$url$Url$fromString = function (str) {
 		A2(elm$core$String$dropLeft, 8, str)) : elm$core$Maybe$Nothing);
 };
 var elm$browser$Browser$element = _Browser_element;
-var elm$core$Platform$Cmd$batch = _Platform_batch;
-var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var elm$core$Result$withDefault = F2(
 	function (def, result) {
 		if (result.$ === 'Ok') {
