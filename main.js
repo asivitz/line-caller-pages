@@ -5832,7 +5832,7 @@ var author$project$View$view = function (model) {
 								A2(author$project$View$renderButton, 'Undo', author$project$Messages$UndoPoint),
 								A2(
 								author$project$View$renderButton,
-								model.weChoose ? 'We Choose' : 'They Choose',
+								model.weChoose ? 'Us' : 'Them',
 								author$project$Messages$FlipGenZone),
 								A2(
 								author$project$View$renderButton,
