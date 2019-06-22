@@ -4973,7 +4973,7 @@ var author$project$Model$roster = Gizra$elm_all_set$EverySet$fromList(
 			A4(author$project$Model$Player, 'Nick', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Male),
 			A4(author$project$Model$Player, 'Ray', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male),
 			A4(author$project$Model$Player, 'Varun', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male),
-			A4(author$project$Model$Player, 'Claire', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Female),
+			A4(author$project$Model$Player, 'Rosty', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Female),
 			A4(author$project$Model$Player, 'Erica', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female),
 			A4(author$project$Model$Player, 'Hannah', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Female),
 			A4(author$project$Model$Player, 'Hops', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female),
@@ -4983,16 +4983,16 @@ var author$project$Model$roster = Gizra$elm_all_set$EverySet$fromList(
 			A4(author$project$Model$Player, 'Lisa', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Female),
 			A4(author$project$Model$Player, 'Maya', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female),
 			A4(author$project$Model$Player, 'Meg', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female),
-			A4(author$project$Model$Player, 'Sam P', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female)
+			A4(author$project$Model$Player, 'Sam', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female)
 		]));
-var author$project$Model$initial = {currentGender: author$project$Model$Female, line: Gizra$elm_all_set$EverySet$empty, players: author$project$Model$roster, points: _List_Nil, weChoose: true};
+var author$project$Model$initialGame = {currentGender: author$project$Model$Female, line: Gizra$elm_all_set$EverySet$empty, players: author$project$Model$roster, points: _List_Nil, weChoose: true};
 var elm$json$Json$Decode$map5 = _Json_map5;
-var author$project$Model$decode = A6(
+var author$project$Model$decodeGame = A6(
 	elm$json$Json$Decode$map5,
 	F5(
 		function (points, line, curGen, players, wechoose) {
 			return _Utils_update(
-				author$project$Model$initial,
+				author$project$Model$initialGame,
 				{currentGender: curGen, line: line, players: players, points: points, weChoose: wechoose});
 		}),
 	A2(
@@ -5018,45 +5018,42 @@ var author$project$Model$decode = A6(
 			Gizra$elm_all_set$EverySet$fromList,
 			elm$json$Json$Decode$list(author$project$Model$decodePlayer))),
 	A2(elm$json$Json$Decode$field, 'weChoose', elm$json$Json$Decode$bool));
-var pzp1997$assoc_list$AssocList$filter = F2(
-	function (isGood, _n0) {
-		var alist = _n0.a;
-		return pzp1997$assoc_list$AssocList$D(
-			A2(
-				elm$core$List$filter,
-				function (_n1) {
-					var key = _n1.a;
-					var value = _n1.b;
-					return A2(isGood, key, value);
-				},
-				alist));
-	});
-var Gizra$elm_all_set$EverySet$filter = F2(
-	function (p, _n0) {
-		var d = _n0.a;
-		return Gizra$elm_all_set$EverySet$EverySet(
-			A2(
-				pzp1997$assoc_list$AssocList$filter,
-				F2(
-					function (k, _n1) {
-						return p(k);
-					}),
-				d));
-	});
-var Gizra$elm_all_set$EverySet$remove = F2(
-	function (k, _n0) {
-		var d = _n0.a;
-		return Gizra$elm_all_set$EverySet$EverySet(
-			A2(pzp1997$assoc_list$AssocList$remove, k, d));
-	});
-var pzp1997$assoc_list$AssocList$size = function (_n0) {
-	var alist = _n0.a;
-	return elm$core$List$length(alist);
+var author$project$Model$initial = {
+	games: _List_fromArray(
+		[author$project$Model$initialGame]),
+	index: 0
 };
-var Gizra$elm_all_set$EverySet$size = function (_n0) {
-	var d = _n0.a;
-	return pzp1997$assoc_list$AssocList$size(d);
-};
+var elm$json$Json$Decode$int = _Json_decodeInt;
+var elm$json$Json$Decode$map2 = _Json_map2;
+var author$project$Model$decode = A3(
+	elm$json$Json$Decode$map2,
+	F2(
+		function (games, idx) {
+			return _Utils_update(
+				author$project$Model$initial,
+				{games: games, index: idx});
+		}),
+	A2(
+		elm$json$Json$Decode$field,
+		'games',
+		elm$json$Json$Decode$list(author$project$Model$decodeGame)),
+	A2(elm$json$Json$Decode$field, 'index', elm$json$Json$Decode$int));
+var author$project$Update$modifyAt = F3(
+	function (f, i, l) {
+		if (l.b) {
+			var x = l.a;
+			var xs = l.b;
+			return (!i) ? A2(
+				elm$core$List$cons,
+				f(x),
+				xs) : A2(
+				elm$core$List$cons,
+				x,
+				A3(author$project$Update$modifyAt, f, i - 1, xs));
+		} else {
+			return _List_Nil;
+		}
+	});
 var elm$core$List$map = F2(
 	function (f, xs) {
 		return A3(
@@ -5174,6 +5171,35 @@ var author$project$Model$encodePoint = function (_n0) {
 				elm$json$Json$Encode$bool(weScored))
 			]));
 };
+var author$project$Model$encodeGame = function (game) {
+	return elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'points',
+				A2(elm$json$Json$Encode$list, author$project$Model$encodePoint, game.points)),
+				_Utils_Tuple2(
+				'line',
+				A2(
+					elm$json$Json$Encode$list,
+					author$project$Model$encodePlayer,
+					Gizra$elm_all_set$EverySet$toList(game.line))),
+				_Utils_Tuple2(
+				'currentGender',
+				elm$json$Json$Encode$string(
+					author$project$Model$encodeGender(game.currentGender))),
+				_Utils_Tuple2(
+				'players',
+				A2(
+					elm$json$Json$Encode$list,
+					author$project$Model$encodePlayer,
+					Gizra$elm_all_set$EverySet$toList(game.players))),
+				_Utils_Tuple2(
+				'weChoose',
+				elm$json$Json$Encode$bool(game.weChoose))
+			]));
+};
+var elm$json$Json$Encode$int = _Json_wrap;
 var author$project$Model$encode = F2(
 	function (indent, model) {
 		return A2(
@@ -5183,27 +5209,11 @@ var author$project$Model$encode = F2(
 				_List_fromArray(
 					[
 						_Utils_Tuple2(
-						'points',
-						A2(elm$json$Json$Encode$list, author$project$Model$encodePoint, model.points)),
+						'games',
+						A2(elm$json$Json$Encode$list, author$project$Model$encodeGame, model.games)),
 						_Utils_Tuple2(
-						'line',
-						A2(
-							elm$json$Json$Encode$list,
-							author$project$Model$encodePlayer,
-							Gizra$elm_all_set$EverySet$toList(model.line))),
-						_Utils_Tuple2(
-						'currentGender',
-						elm$json$Json$Encode$string(
-							author$project$Model$encodeGender(model.currentGender))),
-						_Utils_Tuple2(
-						'players',
-						A2(
-							elm$json$Json$Encode$list,
-							author$project$Model$encodePlayer,
-							Gizra$elm_all_set$EverySet$toList(model.players))),
-						_Utils_Tuple2(
-						'weChoose',
-						elm$json$Json$Encode$bool(model.weChoose))
+						'index',
+						elm$json$Json$Encode$int(model.index))
 					])));
 	});
 var author$project$Update$save = _Platform_outgoingPort('save', elm$json$Json$Encode$string);
@@ -5213,142 +5223,193 @@ var author$project$Update$saveToStorage = function (model) {
 		author$project$Update$save(
 			A2(author$project$Model$encode, 2, model)));
 };
-var elm$core$Basics$not = _Basics_not;
-var author$project$Update$update = F2(
-	function (msg, model) {
-		return author$project$Update$saveToStorage(
-			function () {
-				switch (msg.$) {
-					case 'PickPlayer':
-						var p = msg.a;
-						var numOfGen = Gizra$elm_all_set$EverySet$size(
-							A2(
-								Gizra$elm_all_set$EverySet$filter,
-								function (x) {
-									return _Utils_eq(x.gender, p.gender);
-								},
-								model.line));
-						var limit = _Utils_eq(model.currentGender, p.gender) ? 4 : 3;
-						return (_Utils_cmp(numOfGen, limit) < 0) ? _Utils_update(
-							model,
-							{
-								line: A2(Gizra$elm_all_set$EverySet$insert, p, model.line)
-							}) : model;
-					case 'RemovePlayer':
-						var p = msg.a;
-						return _Utils_update(
-							model,
-							{
-								line: A2(Gizra$elm_all_set$EverySet$remove, p, model.line)
-							});
-					case 'WeScored':
-						return _Utils_update(
-							model,
-							{
-								line: Gizra$elm_all_set$EverySet$empty,
-								points: A2(
-									elm$core$List$cons,
-									{gender: model.currentGender, line: model.line, weScored: true},
-									model.points),
-								weChoose: !model.weChoose
-							});
-					case 'TheyScored':
-						return _Utils_update(
-							model,
-							{
-								line: Gizra$elm_all_set$EverySet$empty,
-								points: A2(
-									elm$core$List$cons,
-									{gender: model.currentGender, line: model.line, weScored: false},
-									model.points)
-							});
-					case 'UndoPoint':
-						var _n1 = model.points;
-						if (_n1.b) {
-							var x = _n1.a;
-							var xs = _n1.b;
-							return _Utils_update(
-								model,
-								{currentGender: x.gender, line: x.line, points: xs});
-						} else {
-							return model;
-						}
-					case 'FlipGender':
-						return _Utils_update(
-							model,
-							{
-								currentGender: _Utils_eq(model.currentGender, author$project$Model$Female) ? author$project$Model$Male : author$project$Model$Female
-							});
-					case 'FlipGenZone':
-						return _Utils_update(
-							model,
-							{weChoose: !model.weChoose});
-					default:
-						return model;
-				}
-			}());
-	});
-var pzp1997$assoc_list$AssocList$get = F2(
-	function (targetKey, _n0) {
-		get:
-		while (true) {
-			var alist = _n0.a;
-			if (!alist.b) {
-				return elm$core$Maybe$Nothing;
-			} else {
-				var _n2 = alist.a;
-				var key = _n2.a;
-				var value = _n2.b;
-				var rest = alist.b;
-				if (_Utils_eq(key, targetKey)) {
-					return elm$core$Maybe$Just(value);
-				} else {
-					var $temp$targetKey = targetKey,
-						$temp$_n0 = pzp1997$assoc_list$AssocList$D(rest);
-					targetKey = $temp$targetKey;
-					_n0 = $temp$_n0;
-					continue get;
-				}
-			}
-		}
-	});
-var pzp1997$assoc_list$AssocList$member = F2(
-	function (targetKey, dict) {
-		var _n0 = A2(pzp1997$assoc_list$AssocList$get, targetKey, dict);
-		if (_n0.$ === 'Just') {
-			return true;
-		} else {
-			return false;
-		}
-	});
-var pzp1997$assoc_list$AssocList$diff = F2(
-	function (_n0, rightDict) {
-		var leftAlist = _n0.a;
+var pzp1997$assoc_list$AssocList$filter = F2(
+	function (isGood, _n0) {
+		var alist = _n0.a;
 		return pzp1997$assoc_list$AssocList$D(
 			A2(
 				elm$core$List$filter,
 				function (_n1) {
 					var key = _n1.a;
-					return !A2(pzp1997$assoc_list$AssocList$member, key, rightDict);
+					var value = _n1.b;
+					return A2(isGood, key, value);
 				},
-				leftAlist));
+				alist));
 	});
-var Gizra$elm_all_set$EverySet$diff = F2(
-	function (_n0, _n1) {
-		var d1 = _n0.a;
-		var d2 = _n1.a;
+var Gizra$elm_all_set$EverySet$filter = F2(
+	function (p, _n0) {
+		var d = _n0.a;
 		return Gizra$elm_all_set$EverySet$EverySet(
-			A2(pzp1997$assoc_list$AssocList$diff, d1, d2));
+			A2(
+				pzp1997$assoc_list$AssocList$filter,
+				F2(
+					function (k, _n1) {
+						return p(k);
+					}),
+				d));
 	});
-var author$project$Messages$FlipGenZone = {$: 'FlipGenZone'};
-var author$project$Messages$FlipGender = {$: 'FlipGender'};
-var author$project$Messages$PickPlayer = function (a) {
-	return {$: 'PickPlayer', a: a};
+var Gizra$elm_all_set$EverySet$remove = F2(
+	function (k, _n0) {
+		var d = _n0.a;
+		return Gizra$elm_all_set$EverySet$EverySet(
+			A2(pzp1997$assoc_list$AssocList$remove, k, d));
+	});
+var pzp1997$assoc_list$AssocList$size = function (_n0) {
+	var alist = _n0.a;
+	return elm$core$List$length(alist);
 };
-var author$project$Messages$TheyScored = {$: 'TheyScored'};
-var author$project$Messages$UndoPoint = {$: 'UndoPoint'};
-var author$project$Messages$WeScored = {$: 'WeScored'};
-var elm$json$Json$Decode$map2 = _Json_map2;
+var Gizra$elm_all_set$EverySet$size = function (_n0) {
+	var d = _n0.a;
+	return pzp1997$assoc_list$AssocList$size(d);
+};
+var elm$core$Basics$not = _Basics_not;
+var author$project$Update$updateGame = F2(
+	function (msg, model) {
+		switch (msg.$) {
+			case 'PickPlayer':
+				var p = msg.a;
+				var numOfGen = Gizra$elm_all_set$EverySet$size(
+					A2(
+						Gizra$elm_all_set$EverySet$filter,
+						function (x) {
+							return _Utils_eq(x.gender, p.gender);
+						},
+						model.line));
+				var limit = _Utils_eq(model.currentGender, p.gender) ? 4 : 3;
+				return (_Utils_cmp(numOfGen, limit) < 0) ? _Utils_update(
+					model,
+					{
+						line: A2(Gizra$elm_all_set$EverySet$insert, p, model.line)
+					}) : model;
+			case 'RemovePlayer':
+				var p = msg.a;
+				return _Utils_update(
+					model,
+					{
+						line: A2(Gizra$elm_all_set$EverySet$remove, p, model.line)
+					});
+			case 'WeScored':
+				return _Utils_update(
+					model,
+					{
+						line: Gizra$elm_all_set$EverySet$empty,
+						points: A2(
+							elm$core$List$cons,
+							{gender: model.currentGender, line: model.line, weScored: true},
+							model.points),
+						weChoose: !model.weChoose
+					});
+			case 'TheyScored':
+				return _Utils_update(
+					model,
+					{
+						line: Gizra$elm_all_set$EverySet$empty,
+						points: A2(
+							elm$core$List$cons,
+							{gender: model.currentGender, line: model.line, weScored: false},
+							model.points)
+					});
+			case 'UndoPoint':
+				var _n1 = model.points;
+				if (_n1.b) {
+					var x = _n1.a;
+					var xs = _n1.b;
+					return _Utils_update(
+						model,
+						{currentGender: x.gender, line: x.line, points: xs});
+				} else {
+					return model;
+				}
+			case 'FlipGender':
+				return _Utils_update(
+					model,
+					{
+						currentGender: _Utils_eq(model.currentGender, author$project$Model$Female) ? author$project$Model$Male : author$project$Model$Female
+					});
+			case 'FlipGenZone':
+				return _Utils_update(
+					model,
+					{weChoose: !model.weChoose});
+			case 'LoadLine':
+				var l = msg.a;
+				return _Utils_update(
+					model,
+					{
+						line: Gizra$elm_all_set$EverySet$fromList(l)
+					});
+			case 'Noop':
+				return model;
+			default:
+				return model;
+		}
+	});
+var elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
+	});
+var author$project$Update$update = F2(
+	function (msg, model) {
+		return author$project$Update$saveToStorage(
+			function () {
+				switch (msg.$) {
+					case 'NewGame':
+						return _Utils_update(
+							model,
+							{
+								games: A2(elm$core$List$cons, author$project$Model$initialGame, model.games)
+							});
+					case 'NextGame':
+						return _Utils_update(
+							model,
+							{
+								index: A2(elm$core$Basics$max, model.index - 1, 0)
+							});
+					case 'PrevGame':
+						return _Utils_update(
+							model,
+							{
+								index: A2(
+									elm$core$Basics$min,
+									model.index + 1,
+									elm$core$List$length(model.games) - 1)
+							});
+					default:
+						return _Utils_update(
+							model,
+							{
+								games: A3(
+									author$project$Update$modifyAt,
+									author$project$Update$updateGame(msg),
+									model.index,
+									model.games)
+							});
+				}
+			}());
+	});
+var author$project$Messages$NewGame = {$: 'NewGame'};
+var author$project$Messages$NextGame = {$: 'NextGame'};
+var author$project$Messages$PrevGame = {$: 'PrevGame'};
+var author$project$View$pick = F2(
+	function (i, l) {
+		pick:
+		while (true) {
+			if (l.b) {
+				var x = l.a;
+				var xs = l.b;
+				if (!i) {
+					return elm$core$Maybe$Just(x);
+				} else {
+					var $temp$i = i - 1,
+						$temp$l = xs;
+					i = $temp$i;
+					l = $temp$l;
+					continue pick;
+				}
+			} else {
+				return elm$core$Maybe$Nothing;
+			}
+		}
+	});
 var elm$json$Json$Decode$succeed = _Json_succeed;
 var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	switch (handler.$) {
@@ -5404,6 +5465,108 @@ var author$project$View$renderButton = F2(
 					elm$html$Html$text(txt)
 				]));
 	});
+var pzp1997$assoc_list$AssocList$get = F2(
+	function (targetKey, _n0) {
+		get:
+		while (true) {
+			var alist = _n0.a;
+			if (!alist.b) {
+				return elm$core$Maybe$Nothing;
+			} else {
+				var _n2 = alist.a;
+				var key = _n2.a;
+				var value = _n2.b;
+				var rest = alist.b;
+				if (_Utils_eq(key, targetKey)) {
+					return elm$core$Maybe$Just(value);
+				} else {
+					var $temp$targetKey = targetKey,
+						$temp$_n0 = pzp1997$assoc_list$AssocList$D(rest);
+					targetKey = $temp$targetKey;
+					_n0 = $temp$_n0;
+					continue get;
+				}
+			}
+		}
+	});
+var pzp1997$assoc_list$AssocList$member = F2(
+	function (targetKey, dict) {
+		var _n0 = A2(pzp1997$assoc_list$AssocList$get, targetKey, dict);
+		if (_n0.$ === 'Just') {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var pzp1997$assoc_list$AssocList$diff = F2(
+	function (_n0, rightDict) {
+		var leftAlist = _n0.a;
+		return pzp1997$assoc_list$AssocList$D(
+			A2(
+				elm$core$List$filter,
+				function (_n1) {
+					var key = _n1.a;
+					return !A2(pzp1997$assoc_list$AssocList$member, key, rightDict);
+				},
+				leftAlist));
+	});
+var Gizra$elm_all_set$EverySet$diff = F2(
+	function (_n0, _n1) {
+		var d1 = _n0.a;
+		var d2 = _n1.a;
+		return Gizra$elm_all_set$EverySet$EverySet(
+			A2(pzp1997$assoc_list$AssocList$diff, d1, d2));
+	});
+var author$project$Messages$FlipGenZone = {$: 'FlipGenZone'};
+var author$project$Messages$FlipGender = {$: 'FlipGender'};
+var author$project$Messages$LoadLine = function (a) {
+	return {$: 'LoadLine', a: a};
+};
+var author$project$Messages$PickPlayer = function (a) {
+	return {$: 'PickPlayer', a: a};
+};
+var author$project$Messages$TheyScored = {$: 'TheyScored'};
+var author$project$Messages$UndoPoint = {$: 'UndoPoint'};
+var author$project$Messages$WeScored = {$: 'WeScored'};
+var author$project$Model$deuce = A4(author$project$Model$Player, 'Deuce', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$hannah = A4(author$project$Model$Player, 'Hannah', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Female);
+var author$project$Model$hops = A4(author$project$Model$Player, 'Hops', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$matt = A4(author$project$Model$Player, 'Matt', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Male);
+var author$project$Model$sam = A4(author$project$Model$Player, 'Sam', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$varun = A4(author$project$Model$Player, 'Varun', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$counterSpell = _List_fromArray(
+	[author$project$Model$deuce, author$project$Model$matt, author$project$Model$varun, author$project$Model$hannah, author$project$Model$hops, author$project$Model$sam]);
+var author$project$Model$holden = A4(author$project$Model$Player, 'Holden', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$darkness = _List_fromArray(
+	[author$project$Model$holden, author$project$Model$matt, author$project$Model$varun, author$project$Model$hannah, author$project$Model$hops, author$project$Model$sam]);
+var author$project$Model$andrew = A4(author$project$Model$Player, 'Andrew', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
+var author$project$Model$erica = A4(author$project$Model$Player, 'Erica', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
+var author$project$Model$jacob = A4(author$project$Model$Player, 'Jacob', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Male);
+var author$project$Model$meg = A4(author$project$Model$Player, 'Meg', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$nacho = A4(author$project$Model$Player, 'Nacho', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$fear = _List_fromArray(
+	[author$project$Model$nacho, author$project$Model$andrew, author$project$Model$jacob, author$project$Model$meg, author$project$Model$sam, author$project$Model$erica]);
+var author$project$Model$jaqs = A4(author$project$Model$Player, 'Jaqs', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$ksass = A4(author$project$Model$Player, 'Ksass', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$lauren = A4(author$project$Model$Player, 'Lauren', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
+var author$project$Model$nick = A4(author$project$Model$Player, 'Nick', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Male);
+var author$project$Model$lightningBolt = _List_fromArray(
+	[author$project$Model$nick, author$project$Model$andrew, author$project$Model$jacob, author$project$Model$ksass, author$project$Model$jaqs, author$project$Model$lauren]);
+var author$project$Model$bond = A4(author$project$Model$Player, 'Bond', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Male);
+var author$project$Model$chris = A4(author$project$Model$Player, 'Chris', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
+var author$project$Model$gant = A4(author$project$Model$Player, 'Gant', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
+var author$project$Model$rosty = A4(author$project$Model$Player, 'Rosty', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Female);
+var author$project$Model$magicWeapon = _List_fromArray(
+	[author$project$Model$bond, author$project$Model$gant, author$project$Model$chris, author$project$Model$rosty, author$project$Model$lauren, author$project$Model$erica]);
+var author$project$Model$maya = A4(author$project$Model$Player, 'Maya', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$meteorSwarm = _List_fromArray(
+	[author$project$Model$bond, author$project$Model$gant, author$project$Model$chris, author$project$Model$rosty, author$project$Model$jaqs, author$project$Model$maya]);
+var author$project$Model$lisa = A4(author$project$Model$Player, 'Lisa', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Female);
+var author$project$Model$ray = A4(author$project$Model$Player, 'Ray', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$rayOfFrost = _List_fromArray(
+	[author$project$Model$nacho, author$project$Model$holden, author$project$Model$ray, author$project$Model$ksass, author$project$Model$hops, author$project$Model$lisa]);
+var author$project$Model$rayOfSickness = _List_fromArray(
+	[author$project$Model$deuce, author$project$Model$nick, author$project$Model$ray, author$project$Model$meg, author$project$Model$maya, author$project$Model$lisa]);
 var Gizra$elm_all_set$EverySet$member = F2(
 	function (k, _n0) {
 		var d = _n0.a;
@@ -5754,6 +5917,54 @@ var author$project$View$renderScoreInfo = F2(
 						[
 							elm$html$Html$text(
 							_Utils_eq(x.gender, author$project$Model$Male) ? 'Men' : 'Female')
+						])),
+					A2(
+					elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text(
+							_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$meteorSwarm),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Meteor Swarm' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$lightningBolt),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Lightning Bolt' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$magicWeapon),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Magic Weapon' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$rayOfSickness),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Ray of Sickness' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$rayOfFrost),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Ray of Frost' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$fear),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Fear' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$counterSpell),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Counter Spell' : (_Utils_eq(
+								A2(
+									Gizra$elm_all_set$EverySet$diff,
+									Gizra$elm_all_set$EverySet$fromList(author$project$Model$darkness),
+									x.line),
+								Gizra$elm_all_set$EverySet$empty) ? 'Darkness' : ''))))))))
 						]))
 				]));
 	});
@@ -5802,8 +6013,7 @@ var author$project$View$renderPoints = function (_n0) {
 					A2(elm$html$Html$hr, _List_Nil, _List_Nil)
 				])));
 };
-var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
-var author$project$View$view = function (model) {
+var author$project$View$renderGame = function (model) {
 	return A2(
 		elm$html$Html$div,
 		_List_fromArray(
@@ -5823,7 +6033,7 @@ var author$project$View$view = function (model) {
 						elm$html$Html$div,
 						_List_fromArray(
 							[
-								elm$html$Html$Attributes$id('buttons')
+								elm$html$Html$Attributes$class('buttons')
 							]),
 						_List_fromArray(
 							[
@@ -5843,6 +6053,47 @@ var author$project$View$view = function (model) {
 						elm$html$Html$div,
 						_List_fromArray(
 							[
+								elm$html$Html$Attributes$class('buttons')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								author$project$View$renderButton,
+								'MS',
+								author$project$Messages$LoadLine(author$project$Model$meteorSwarm)),
+								A2(
+								author$project$View$renderButton,
+								'LB',
+								author$project$Messages$LoadLine(author$project$Model$lightningBolt)),
+								A2(
+								author$project$View$renderButton,
+								'MW',
+								author$project$Messages$LoadLine(author$project$Model$magicWeapon)),
+								A2(
+								author$project$View$renderButton,
+								'RS',
+								author$project$Messages$LoadLine(author$project$Model$rayOfSickness)),
+								A2(
+								author$project$View$renderButton,
+								'RF',
+								author$project$Messages$LoadLine(author$project$Model$rayOfFrost)),
+								A2(
+								author$project$View$renderButton,
+								'F',
+								author$project$Messages$LoadLine(author$project$Model$fear)),
+								A2(
+								author$project$View$renderButton,
+								'CS',
+								author$project$Messages$LoadLine(author$project$Model$counterSpell)),
+								A2(
+								author$project$View$renderButton,
+								'D',
+								author$project$Messages$LoadLine(author$project$Model$darkness))
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
 								elm$html$Html$Attributes$class('roster')
 							]),
 						_List_fromArray(
@@ -5854,6 +6105,51 @@ var author$project$View$view = function (model) {
 								A2(Gizra$elm_all_set$EverySet$diff, model.players, model.line))
 							]))
 					]))
+			]));
+};
+var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
+var author$project$View$view = function (model) {
+	return A2(
+		elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$id('game-buttons')
+					]),
+				_List_fromArray(
+					[
+						A2(author$project$View$renderButton, '<', author$project$Messages$PrevGame),
+						A2(author$project$View$renderButton, 'New Game', author$project$Messages$NewGame),
+						A2(author$project$View$renderButton, '>', author$project$Messages$NextGame)
+					])),
+				A2(
+				elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text('Game '),
+						elm$html$Html$text(
+						elm$core$String$fromInt(
+							elm$core$List$length(model.games) - model.index)),
+						elm$html$Html$text(' of '),
+						elm$html$Html$text(
+						elm$core$String$fromInt(
+							elm$core$List$length(model.games)))
+					])),
+				A2(elm$html$Html$hr, _List_Nil, _List_Nil),
+				function () {
+				var _n0 = A2(author$project$View$pick, model.index, model.games);
+				if (_n0.$ === 'Just') {
+					var g = _n0.a;
+					return author$project$View$renderGame(g);
+				} else {
+					return A2(elm$html$Html$div, _List_Nil, _List_Nil);
+				}
+			}()
 			]));
 };
 var elm$browser$Browser$External = function (a) {

@@ -17,7 +17,7 @@ body {
   cursor: pointer;
 }
 
-#buttons {
+.buttons {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -52,4 +52,9 @@ body {
 
 .score-info > span {
   margin: 0 1em;
+}
+
+#game-buttons {
+  display: flex;
+  flex-direction: row;
 }
