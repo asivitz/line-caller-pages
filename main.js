@@ -5307,7 +5307,8 @@ var author$project$Update$updateGame = F2(
 						points: A2(
 							elm$core$List$cons,
 							{gender: model.currentGender, line: model.line, weScored: false},
-							model.points)
+							model.points),
+						weChoose: !model.weChoose
 					});
 			case 'UndoPoint':
 				var _n1 = model.points;
