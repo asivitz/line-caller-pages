@@ -5362,7 +5362,7 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
-var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$button = _VirtualDom_node('button');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$html$Html$Attributes$stringProperty = F2(
@@ -5393,7 +5393,7 @@ var elm$html$Html$Events$onClick = function (msg) {
 var author$project$View$renderButton = F2(
 	function (txt, msg) {
 		return A2(
-			elm$html$Html$div,
+			elm$html$Html$button,
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class('button'),
@@ -5563,7 +5563,7 @@ var author$project$View$renderPlayer = F3(
 		var opac = (twoPointCount === 2) ? '0.25' : ((onePointCount === 1) ? '0.4' : ((twoPointCount === 1) ? '0.60' : '1'));
 		var col = _Utils_eq(p.gender, author$project$Model$Male) ? 'rgb(128,196,239)' : 'rgb(252,198,255)';
 		return A2(
-			elm$html$Html$div,
+			elm$html$Html$button,
 			_List_fromArray(
 				[
 					elm$html$Html$Attributes$class('player'),
@@ -5580,6 +5580,7 @@ var author$project$View$renderPlayer = F3(
 					elm$html$Html$text(p.name)
 				]));
 	});
+var elm$html$Html$div = _VirtualDom_node('div');
 var author$project$View$renderPlayerList = F3(
 	function (points, msg, ps) {
 		var os = A2(

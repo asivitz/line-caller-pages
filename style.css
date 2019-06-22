@@ -1,6 +1,12 @@
 body {
   font-family: "Gill Sans", sans-serif;
-  font-size: 24px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+button {
+  font-family: "Gill Sans", sans-serif;
+  font-size: 32px;
   font-weight: bold;
 }
 
@@ -15,6 +21,7 @@ body {
   padding: 0.3em;
   margin: 0.5em 0.3em;
   cursor: pointer;
+  border: 0;
 }
 
 #buttons {
