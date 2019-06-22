@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div id="elm">
+    </div>
+    <script>
+      var initialState;
+      try {
+          initialState = JSON.parse(localStorage.getItem('line-caller-app'));
+      } catch (e) {
+      }
+
+      var app = Elm.Linecaller.init({
+          node: document.getElementById('elm'),
+          flags: initialState
+      });
+
+      app.ports.save.subscribe(function (state) {
+          localStorage.setItem('line-caller-app', state)
+      });
+    </script>
+  </body>
+</html>
