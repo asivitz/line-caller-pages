@@ -5530,44 +5530,42 @@ var author$project$Messages$TheyScored = {$: 'TheyScored'};
 var author$project$Messages$UndoPoint = {$: 'UndoPoint'};
 var author$project$Messages$WeScored = {$: 'WeScored'};
 var author$project$Model$deuce = A4(author$project$Model$Player, 'Deuce', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
-var author$project$Model$hannah = A4(author$project$Model$Player, 'Hannah', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Female);
-var author$project$Model$hops = A4(author$project$Model$Player, 'Hops', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$matt = A4(author$project$Model$Player, 'Matt', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Male);
-var author$project$Model$sam = A4(author$project$Model$Player, 'Sam', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$varun = A4(author$project$Model$Player, 'Varun', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male);
 var author$project$Model$counterSpell = _List_fromArray(
-	[author$project$Model$deuce, author$project$Model$matt, author$project$Model$varun, author$project$Model$hannah, author$project$Model$hops, author$project$Model$sam]);
+	[author$project$Model$deuce, author$project$Model$matt, author$project$Model$varun]);
 var author$project$Model$holden = A4(author$project$Model$Player, 'Holden', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
 var author$project$Model$darkness = _List_fromArray(
-	[author$project$Model$holden, author$project$Model$matt, author$project$Model$varun, author$project$Model$hannah, author$project$Model$hops, author$project$Model$sam]);
+	[author$project$Model$holden, author$project$Model$matt, author$project$Model$varun]);
 var author$project$Model$andrew = A4(author$project$Model$Player, 'Andrew', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
 var author$project$Model$erica = A4(author$project$Model$Player, 'Erica', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
+var author$project$Model$hannah = A4(author$project$Model$Player, 'Hannah', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Female);
 var author$project$Model$jacob = A4(author$project$Model$Player, 'Jacob', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Male);
-var author$project$Model$meg = A4(author$project$Model$Player, 'Meg', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$nacho = A4(author$project$Model$Player, 'Nacho', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$sam = A4(author$project$Model$Player, 'Sam', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$fear = _List_fromArray(
-	[author$project$Model$nacho, author$project$Model$andrew, author$project$Model$jacob, author$project$Model$meg, author$project$Model$sam, author$project$Model$erica]);
-var author$project$Model$jaqs = A4(author$project$Model$Player, 'Jaqs', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
+	[author$project$Model$nacho, author$project$Model$andrew, author$project$Model$jacob, author$project$Model$hannah, author$project$Model$sam, author$project$Model$erica]);
+var author$project$Model$hops = A4(author$project$Model$Player, 'Hops', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$ksass = A4(author$project$Model$Player, 'Ksass', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$lauren = A4(author$project$Model$Player, 'Lauren', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
 var author$project$Model$nick = A4(author$project$Model$Player, 'Nick', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Male);
 var author$project$Model$lightningBolt = _List_fromArray(
-	[author$project$Model$nick, author$project$Model$andrew, author$project$Model$jacob, author$project$Model$ksass, author$project$Model$jaqs, author$project$Model$lauren]);
+	[author$project$Model$nick, author$project$Model$andrew, author$project$Model$jacob, author$project$Model$ksass, author$project$Model$hops, author$project$Model$lauren]);
 var author$project$Model$bond = A4(author$project$Model$Player, 'Bond', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Male);
 var author$project$Model$chris = A4(author$project$Model$Player, 'Chris', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
 var author$project$Model$gant = A4(author$project$Model$Player, 'Gant', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
-var author$project$Model$rosty = A4(author$project$Model$Player, 'Rosty', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Female);
+var author$project$Model$meg = A4(author$project$Model$Player, 'Meg', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$magicWeapon = _List_fromArray(
-	[author$project$Model$bond, author$project$Model$gant, author$project$Model$chris, author$project$Model$rosty, author$project$Model$lauren, author$project$Model$erica]);
+	[author$project$Model$bond, author$project$Model$gant, author$project$Model$chris, author$project$Model$meg, author$project$Model$lauren, author$project$Model$erica]);
 var author$project$Model$maya = A4(author$project$Model$Player, 'Maya', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$meteorSwarm = _List_fromArray(
-	[author$project$Model$bond, author$project$Model$gant, author$project$Model$chris, author$project$Model$rosty, author$project$Model$jaqs, author$project$Model$maya]);
+	[author$project$Model$bond, author$project$Model$gant, author$project$Model$chris, author$project$Model$meg, author$project$Model$maya, author$project$Model$hops]);
 var author$project$Model$lisa = A4(author$project$Model$Player, 'Lisa', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Female);
 var author$project$Model$ray = A4(author$project$Model$Player, 'Ray', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male);
 var author$project$Model$rayOfFrost = _List_fromArray(
-	[author$project$Model$nacho, author$project$Model$holden, author$project$Model$ray, author$project$Model$ksass, author$project$Model$hops, author$project$Model$lisa]);
+	[author$project$Model$nacho, author$project$Model$holden, author$project$Model$ray, author$project$Model$ksass, author$project$Model$lisa, author$project$Model$sam]);
 var author$project$Model$rayOfSickness = _List_fromArray(
-	[author$project$Model$deuce, author$project$Model$nick, author$project$Model$ray, author$project$Model$meg, author$project$Model$maya, author$project$Model$lisa]);
+	[author$project$Model$deuce, author$project$Model$nick, author$project$Model$ray, author$project$Model$hannah, author$project$Model$maya, author$project$Model$lisa]);
 var Gizra$elm_all_set$EverySet$member = F2(
 	function (k, _n0) {
 		var d = _n0.a;
@@ -5862,6 +5860,57 @@ var author$project$View$enumerate = function (l) {
 			author$project$View$enumerate(xs));
 	}
 };
+var elm$html$Html$span = _VirtualDom_node('span');
+var author$project$View$renderLineName = function (line) {
+	return A2(
+		elm$html$Html$span,
+		_List_Nil,
+		_List_fromArray(
+			[
+				elm$html$Html$text(
+				_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$meteorSwarm),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Meteor Swarm' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$lightningBolt),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Lightning Bolt' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$magicWeapon),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Magic Weapon' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$rayOfSickness),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Ray of Sickness' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$rayOfFrost),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Ray of Frost' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$fear),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Fear' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$counterSpell),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Counter Spell' : (_Utils_eq(
+					A2(
+						Gizra$elm_all_set$EverySet$diff,
+						Gizra$elm_all_set$EverySet$fromList(author$project$Model$darkness),
+						line),
+					Gizra$elm_all_set$EverySet$empty) ? 'Darkness' : ''))))))))
+			]));
+};
 var author$project$Messages$Noop = {$: 'Noop'};
 var author$project$View$renderScore = function (ps) {
 	var ourScore = elm$core$List$length(
@@ -5893,7 +5942,6 @@ var author$project$View$renderScore = function (ps) {
 				elm$core$String$fromInt(oppScore))
 			]));
 };
-var elm$html$Html$span = _VirtualDom_node('span');
 var author$project$View$renderScoreInfo = F2(
 	function (ps, x) {
 		return A2(
@@ -5919,54 +5967,7 @@ var author$project$View$renderScoreInfo = F2(
 							elm$html$Html$text(
 							_Utils_eq(x.gender, author$project$Model$Male) ? 'Men' : 'Female')
 						])),
-					A2(
-					elm$html$Html$span,
-					_List_Nil,
-					_List_fromArray(
-						[
-							elm$html$Html$text(
-							_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$meteorSwarm),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Meteor Swarm' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$lightningBolt),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Lightning Bolt' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$magicWeapon),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Magic Weapon' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$rayOfSickness),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Ray of Sickness' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$rayOfFrost),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Ray of Frost' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$fear),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Fear' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$counterSpell),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Counter Spell' : (_Utils_eq(
-								A2(
-									Gizra$elm_all_set$EverySet$diff,
-									Gizra$elm_all_set$EverySet$fromList(author$project$Model$darkness),
-									x.line),
-								Gizra$elm_all_set$EverySet$empty) ? 'Darkness' : ''))))))))
-						]))
+					author$project$View$renderLineName(x.line)
 				]));
 	});
 var elm$html$Html$hr = _VirtualDom_node('hr');
@@ -6010,6 +6011,7 @@ var author$project$View$renderPoints = function (_n0) {
 					author$project$View$enumerate(points))),
 			_List_fromArray(
 				[
+					author$project$View$renderLineName(line),
 					A3(author$project$View$renderPlayersDivided, points, author$project$Messages$RemovePlayer, line),
 					A2(elm$html$Html$hr, _List_Nil, _List_Nil)
 				])));
