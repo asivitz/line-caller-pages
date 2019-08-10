@@ -4963,24 +4963,25 @@ var author$project$Model$bond = A4(author$project$Model$Player, 'Bond', author$p
 var author$project$Model$chris = A4(author$project$Model$Player, 'Chris', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
 var author$project$Model$deuce = A4(author$project$Model$Player, 'Deuce', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
 var author$project$Model$dreams = A4(author$project$Model$Player, 'Dreams', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Male);
+var author$project$Model$erica = A4(author$project$Model$Player, 'Erica', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
 var author$project$Model$gant = A4(author$project$Model$Player, 'Gant', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Male);
 var author$project$Model$hannah = A4(author$project$Model$Player, 'Hannah', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Female);
-var author$project$Model$holden = A4(author$project$Model$Player, 'Holden', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
-var author$project$Model$hops = A4(author$project$Model$Player, 'Hops', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
 var author$project$Model$jacob = A4(author$project$Model$Player, 'Jacob', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Male);
 var author$project$Model$jaime = A4(author$project$Model$Player, 'Jaime', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$jaqs = A4(author$project$Model$Player, 'Jaqs', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$ksass = A4(author$project$Model$Player, 'Ksass', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
-var author$project$Model$lisa = A4(author$project$Model$Player, 'Lisa', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
+var author$project$Model$lauren = A4(author$project$Model$Player, 'Lauren', author$project$Model$Cutter, author$project$Model$Offense, author$project$Model$Female);
 var author$project$Model$matt = A4(author$project$Model$Player, 'Matt', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Male);
-var author$project$Model$meg = A4(author$project$Model$Player, 'Meg', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$mego = A4(author$project$Model$Player, 'Meghan', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Female);
 var author$project$Model$nacho = A4(author$project$Model$Player, 'Nacho', author$project$Model$Handler, author$project$Model$Defense, author$project$Model$Male);
+var author$project$Model$nick = A4(author$project$Model$Player, 'Nick', author$project$Model$Handler, author$project$Model$Balanced, author$project$Model$Male);
 var author$project$Model$ray = A4(author$project$Model$Player, 'Ray', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Male);
 var author$project$Model$rosty = A4(author$project$Model$Player, 'Rosty', author$project$Model$Handler, author$project$Model$Offense, author$project$Model$Female);
+var author$project$Model$sam = A4(author$project$Model$Player, 'Sam', author$project$Model$Cutter, author$project$Model$Balanced, author$project$Model$Female);
 var author$project$Model$shawna = A4(author$project$Model$Player, 'Shawna', author$project$Model$Cutter, author$project$Model$Defense, author$project$Model$Female);
 var author$project$Model$roster = Gizra$elm_all_set$EverySet$fromList(
 	_List_fromArray(
-		[author$project$Model$andrew, author$project$Model$bond, author$project$Model$chris, author$project$Model$deuce, author$project$Model$dreams, author$project$Model$gant, author$project$Model$holden, author$project$Model$jacob, author$project$Model$jaime, author$project$Model$matt, author$project$Model$nacho, author$project$Model$ray, author$project$Model$rosty, author$project$Model$hannah, author$project$Model$hops, author$project$Model$ksass, author$project$Model$lisa, author$project$Model$meg, author$project$Model$mego, author$project$Model$shawna]));
+		[author$project$Model$andrew, author$project$Model$bond, author$project$Model$chris, author$project$Model$deuce, author$project$Model$dreams, author$project$Model$gant, author$project$Model$jacob, author$project$Model$jaime, author$project$Model$matt, author$project$Model$nacho, author$project$Model$nick, author$project$Model$ray, author$project$Model$rosty, author$project$Model$erica, author$project$Model$hannah, author$project$Model$jaqs, author$project$Model$ksass, author$project$Model$lauren, author$project$Model$mego, author$project$Model$sam, author$project$Model$shawna]));
 var author$project$Model$initialGame = {currentGender: author$project$Model$Female, line: Gizra$elm_all_set$EverySet$empty, players: author$project$Model$roster, points: _List_Nil, weChoose: true};
 var elm$json$Json$Decode$map5 = _Json_map5;
 var author$project$Model$decodeGame = A6(
