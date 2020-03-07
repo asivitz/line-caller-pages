@@ -4943,24 +4943,23 @@ var author$project$Model$andrew = A3(author$project$Model$Player, 'Andrew', auth
 var author$project$Model$andy = A3(author$project$Model$Player, 'Andy', author$project$Model$Handler, author$project$Model$Defense);
 var author$project$Model$carlos = A3(author$project$Model$Player, 'Carlos', author$project$Model$Cutter, author$project$Model$Offense);
 var author$project$Model$eric = A3(author$project$Model$Player, 'Eric', author$project$Model$Handler, author$project$Model$Offense);
-var author$project$Model$eshaan = A3(author$project$Model$Player, 'Eshaan', author$project$Model$Handler, author$project$Model$Balanced);
+var author$project$Model$eshaan = A3(author$project$Model$Player, 'Eshaan', author$project$Model$Handler, author$project$Model$Offense);
 var author$project$Model$henrik = A3(author$project$Model$Player, 'Henrik', author$project$Model$Cutter, author$project$Model$Balanced);
-var author$project$Model$ian = A3(author$project$Model$Player, 'Ian', author$project$Model$Cutter, author$project$Model$Balanced);
-var author$project$Model$kural = A3(author$project$Model$Player, 'Kural', author$project$Model$Cutter, author$project$Model$Defense);
+var author$project$Model$ian = A3(author$project$Model$Player, 'Ian', author$project$Model$Cutter, author$project$Model$Offense);
+var author$project$Model$kural = A3(author$project$Model$Player, 'Kural', author$project$Model$Cutter, author$project$Model$Balanced);
 var author$project$Model$luka = A3(author$project$Model$Player, 'Luka', author$project$Model$Cutter, author$project$Model$Defense);
 var author$project$Model$matt = A3(author$project$Model$Player, 'Matt', author$project$Model$Cutter, author$project$Model$Defense);
 var author$project$Model$mikema = A3(author$project$Model$Player, 'Mikema', author$project$Model$Cutter, author$project$Model$Defense);
-var author$project$Model$miles = A3(author$project$Model$Player, 'Miles', author$project$Model$Handler, author$project$Model$Defense);
+var author$project$Model$miles = A3(author$project$Model$Player, 'Miles', author$project$Model$Handler, author$project$Model$Balanced);
 var author$project$Model$munir = A3(author$project$Model$Player, 'Munir', author$project$Model$Handler, author$project$Model$Defense);
 var author$project$Model$nathan = A3(author$project$Model$Player, 'Nathan', author$project$Model$Cutter, author$project$Model$Defense);
 var author$project$Model$nic = A3(author$project$Model$Player, 'Nicaron', author$project$Model$Cutter, author$project$Model$Offense);
 var author$project$Model$patrick = A3(author$project$Model$Player, 'Patrick', author$project$Model$Cutter, author$project$Model$Offense);
 var author$project$Model$peter = A3(author$project$Model$Player, 'Peter', author$project$Model$Cutter, author$project$Model$Balanced);
-var author$project$Model$sean = A3(author$project$Model$Player, 'Sean', author$project$Model$Cutter, author$project$Model$Defense);
-var author$project$Model$watters = A3(author$project$Model$Player, 'Watters', author$project$Model$Cutter, author$project$Model$Offense);
+var author$project$Model$sean = A3(author$project$Model$Player, 'Sean', author$project$Model$Cutter, author$project$Model$Balanced);
 var author$project$Model$roster = Gizra$elm_all_set$EverySet$fromList(
 	_List_fromArray(
-		[author$project$Model$albert, author$project$Model$andrew, author$project$Model$andy, author$project$Model$carlos, author$project$Model$eric, author$project$Model$eshaan, author$project$Model$henrik, author$project$Model$ian, author$project$Model$luka, author$project$Model$matt, author$project$Model$kural, author$project$Model$mikema, author$project$Model$miles, author$project$Model$munir, author$project$Model$nathan, author$project$Model$nic, author$project$Model$watters, author$project$Model$patrick, author$project$Model$peter, author$project$Model$sean]));
+		[author$project$Model$albert, author$project$Model$andrew, author$project$Model$andy, author$project$Model$carlos, author$project$Model$eric, author$project$Model$eshaan, author$project$Model$henrik, author$project$Model$ian, author$project$Model$luka, author$project$Model$matt, author$project$Model$kural, author$project$Model$mikema, author$project$Model$miles, author$project$Model$munir, author$project$Model$nathan, author$project$Model$nic, author$project$Model$patrick, author$project$Model$peter, author$project$Model$sean]));
 var author$project$Model$initialGame = {line: Gizra$elm_all_set$EverySet$empty, players: author$project$Model$roster, points: _List_Nil};
 var author$project$Model$decodeGame = A4(
 	elm$json$Json$Decode$map3,
