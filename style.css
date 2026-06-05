@@ -15,6 +15,7 @@ body {
   padding: 0.3em;
   margin: 0.5em 0.3em;
   cursor: pointer;
+  width: 41%;
 }
 
 .buttons {
@@ -36,13 +37,22 @@ body {
 }
 
 .player-column {
-  width: 10em;
+  /*width: 20em;*/
   margin: 0 0.3em;
+  width: 50%;
 }
 
 .roster .player-column > div {
   border: 1px dotted black;
   margin: 0.6em 0;
+}
+
+.player-column > div {
+  display: flex;
+  flex-wrap: wrap;
+  /*width: 20em;*/
+  justify-content: flex-start;
+  flex-direction: row;
 }
 
 .score-info {
