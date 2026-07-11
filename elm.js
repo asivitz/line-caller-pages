@@ -5659,56 +5659,22 @@ var $author$project$Messages$RemovePlayer = function (a) {
 var $author$project$Messages$TheyScored = {$: 1};
 var $author$project$Messages$UndoPoint = {$: 4};
 var $author$project$Messages$WeScored = {$: 0};
-var $pzp1997$assoc_list$AssocList$get = F2(
-	function (targetKey, _v0) {
-		get:
-		while (true) {
-			var alist = _v0;
-			if (!alist.b) {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var _v2 = alist.a;
-				var key = _v2.a;
-				var value = _v2.b;
-				var rest = alist.b;
-				if (_Utils_eq(key, targetKey)) {
-					return $elm$core$Maybe$Just(value);
-				} else {
-					var $temp$targetKey = targetKey,
-						$temp$_v0 = rest;
-					targetKey = $temp$targetKey;
-					_v0 = $temp$_v0;
-					continue get;
-				}
-			}
-		}
-	});
-var $pzp1997$assoc_list$AssocList$member = F2(
-	function (targetKey, dict) {
-		var _v0 = A2($pzp1997$assoc_list$AssocList$get, targetKey, dict);
-		if (!_v0.$) {
-			return true;
+var $author$project$View$flipGender = function (x) {
+	if (x === 1) {
+		return 0;
+	} else {
+		return 1;
+	}
+};
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
 		} else {
-			return false;
+			return $elm$core$Maybe$Nothing;
 		}
-	});
-var $elm$core$Basics$not = _Basics_not;
-var $pzp1997$assoc_list$AssocList$diff = F2(
-	function (_v0, rightDict) {
-		var leftAlist = _v0;
-		return A2(
-			$elm$core$List$filter,
-			function (_v1) {
-				var key = _v1.a;
-				return !A2($pzp1997$assoc_list$AssocList$member, key, rightDict);
-			},
-			leftAlist);
-	});
-var $Gizra$elm_all_set$EverySet$diff = F2(
-	function (_v0, _v1) {
-		var d1 = _v0;
-		var d2 = _v1;
-		return A2($pzp1997$assoc_list$AssocList$diff, d1, d2);
 	});
 var $pzp1997$assoc_list$AssocList$filter = F2(
 	function (isGood, _v0) {
@@ -5732,23 +5698,6 @@ var $Gizra$elm_all_set$EverySet$filter = F2(
 					return p(k);
 				}),
 			d);
-	});
-var $author$project$View$flipGender = function (x) {
-	if (x === 1) {
-		return 0;
-	} else {
-		return 1;
-	}
-};
-var $elm$core$Maybe$map = F2(
-	function (f, maybe) {
-		if (!maybe.$) {
-			var value = maybe.a;
-			return $elm$core$Maybe$Just(
-				f(value));
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
 	});
 var $elm$core$Basics$ge = _Utils_ge;
 var $pzp1997$assoc_list$AssocList$size = function (_v0) {
@@ -5804,6 +5753,57 @@ var $author$project$View$currentGender = function (model) {
 		}
 	}
 };
+var $pzp1997$assoc_list$AssocList$get = F2(
+	function (targetKey, _v0) {
+		get:
+		while (true) {
+			var alist = _v0;
+			if (!alist.b) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var _v2 = alist.a;
+				var key = _v2.a;
+				var value = _v2.b;
+				var rest = alist.b;
+				if (_Utils_eq(key, targetKey)) {
+					return $elm$core$Maybe$Just(value);
+				} else {
+					var $temp$targetKey = targetKey,
+						$temp$_v0 = rest;
+					targetKey = $temp$targetKey;
+					_v0 = $temp$_v0;
+					continue get;
+				}
+			}
+		}
+	});
+var $pzp1997$assoc_list$AssocList$member = F2(
+	function (targetKey, dict) {
+		var _v0 = A2($pzp1997$assoc_list$AssocList$get, targetKey, dict);
+		if (!_v0.$) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var $elm$core$Basics$not = _Basics_not;
+var $pzp1997$assoc_list$AssocList$diff = F2(
+	function (_v0, rightDict) {
+		var leftAlist = _v0;
+		return A2(
+			$elm$core$List$filter,
+			function (_v1) {
+				var key = _v1.a;
+				return !A2($pzp1997$assoc_list$AssocList$member, key, rightDict);
+			},
+			leftAlist);
+	});
+var $Gizra$elm_all_set$EverySet$diff = F2(
+	function (_v0, _v1) {
+		var d1 = _v0;
+		var d2 = _v1;
+		return A2($pzp1997$assoc_list$AssocList$diff, d1, d2);
+	});
 var $author$project$View$limitForGender = F2(
 	function (model, gender) {
 		var _v0 = $author$project$View$currentGender(model);
@@ -6283,6 +6283,27 @@ var $author$project$View$renderGame = function (model) {
 								$author$project$View$renderButton,
 								$Gizra$elm_all_set$EverySet$isEmpty(model.H) ? 'Lock' : 'Unlock',
 								$author$project$Messages$Pending)
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								function () {
+									var _v1 = $author$project$View$currentGender(model);
+									if (!_v1.$) {
+										if (_v1.a === 1) {
+											var _v2 = _v1.a;
+											return 'DOM';
+										} else {
+											var _v3 = _v1.a;
+											return 'DOW';
+										}
+									} else {
+										return '';
+									}
+								}())
 							])),
 						A2(
 						$elm$html$Html$div,
