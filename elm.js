@@ -5990,7 +5990,7 @@ var $author$project$View$renderPlayer = F3(
 				},
 				A2($elm$core$List$take, 1, points)));
 		var opac = (twoPointCount === 2) ? '0.25' : ((onePointCount === 1) ? '0.4' : ((twoPointCount === 1) ? '0.60' : '1'));
-		var col = (p.M === 1) ? 'rgb(128,196,239)' : 'rgb(252,198,255)';
+		var col = (p.M === 1) ? 'rgb(128,196,239)' : 'rgb(239,128,128)';
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
@@ -6234,7 +6234,7 @@ var $author$project$View$renderGame = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('points'),
-								A2($elm$html$Html$Attributes$style, 'background-color', 'rgb(253, 255, 186)')
+								A2($elm$html$Html$Attributes$style, 'background-color', 'rgb(37, 44, 56)')
 							]),
 						_List_fromArray(
 							[
