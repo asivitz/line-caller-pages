@@ -6281,7 +6281,7 @@ var $author$project$View$renderGame = function (model) {
 								A2($author$project$View$renderButton, 'Undo', $author$project$Messages$UndoPoint),
 								A2(
 								$author$project$View$renderButton,
-								$Gizra$elm_all_set$EverySet$isEmpty(model.H) ? 'Pending' : 'Un-Pending',
+								$Gizra$elm_all_set$EverySet$isEmpty(model.H) ? 'Lock' : 'Unlock',
 								$author$project$Messages$Pending)
 							])),
 						A2(
