@@ -4948,7 +4948,7 @@ var $author$project$Model$roster = $Gizra$elm_all_set$EverySet$fromList(
 		[
 			A4($author$project$Model$Player, 'Abby', 1, 0, 0),
 			A4($author$project$Model$Player, 'Chip', 1, 0, 0),
-			A4($author$project$Model$Player, 'Coco', 1, 0, 0),
+			A4($author$project$Model$Player, 'Coco', 0, 0, 0),
 			A4($author$project$Model$Player, 'Maya', 0, 0, 0),
 			A4($author$project$Model$Player, 'Emy', 1, 0, 0),
 			A4($author$project$Model$Player, 'Alex', 1, 0, 1),
