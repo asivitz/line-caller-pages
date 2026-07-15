@@ -586,11 +586,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.R.o === region.X.o)
+	if (region.S.o === region.Y.o)
 	{
-		return 'on line ' + region.R.o;
+		return 'on line ' + region.S.o;
 	}
-	return 'on lines ' + region.R.o + ' through ' + region.X.o;
+	return 'on lines ' + region.S.o + ' through ' + region.Y.o;
 }
 
 
@@ -1841,9 +1841,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aE,
-		impl.aO,
-		impl.aL,
+		impl.aG,
+		impl.aR,
+		impl.aN,
 		function() { return function() {} }
 	);
 });
@@ -2644,8 +2644,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		k: func(record.k),
-		S: record.S,
-		P: record.P
+		T: record.T,
+		Q: record.Q
 	}
 });
 
@@ -2914,10 +2914,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.k;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.S;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.T;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.P) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.Q) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3863,11 +3863,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aE,
-		impl.aO,
-		impl.aL,
+		impl.aG,
+		impl.aR,
+		impl.aN,
 		function(sendToApp, initialModel) {
-			var view = impl.aP;
+			var view = impl.aS;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3899,12 +3899,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aE,
-		impl.aO,
-		impl.aL,
+		impl.aG,
+		impl.aR,
+		impl.aN,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.Q && impl.Q(sendToApp)
-			var view = impl.aP;
+			var divertHrefToApp = impl.R && impl.R(sendToApp)
+			var view = impl.aS;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3912,12 +3912,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aw);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.ax);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aN) && (_VirtualDom_doc.title = title = doc.aN);
+				(title !== doc.aQ) && (_VirtualDom_doc.title = title = doc.aQ);
 			});
 		}
 	);
@@ -3968,12 +3968,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.aF;
-	var onUrlRequest = impl.aG;
+	var onUrlChange = impl.aH;
+	var onUrlRequest = impl.aI;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		Q: function(sendToApp)
+		R: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -3989,9 +3989,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.ak === next.ak
-							&& curr._ === next._
-							&& curr.ag.a === next.ag.a
+							&& curr.al === next.al
+							&& curr.aa === next.aa
+							&& curr.ah.a === next.ah.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -3999,13 +3999,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		aE: function(flags)
+		aG: function(flags)
 		{
-			return A3(impl.aE, flags, _Browser_getUrl(), key);
+			return A3(impl.aG, flags, _Browser_getUrl(), key);
 		},
-		aP: impl.aP,
-		aO: impl.aO,
-		aL: impl.aL
+		aS: impl.aS,
+		aR: impl.aR,
+		aN: impl.aN
 	});
 }
 
@@ -4071,17 +4071,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { aC: 'hidden', A: 'visibilitychange' }
+		? { aE: 'hidden', A: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { aC: 'mozHidden', A: 'mozvisibilitychange' }
+		? { aE: 'mozHidden', A: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { aC: 'msHidden', A: 'msvisibilitychange' }
+		? { aE: 'msHidden', A: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { aC: 'webkitHidden', A: 'webkitvisibilitychange' }
-		: { aC: 'hidden', A: 'visibilitychange' };
+		? { aE: 'webkitHidden', A: 'webkitvisibilitychange' }
+		: { aE: 'hidden', A: 'visibilitychange' };
 }
 
 
@@ -4162,10 +4162,10 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ao: _Browser_getScene(),
-		as: {
-			K: _Browser_window.pageXOffset,
-			L: _Browser_window.pageYOffset,
+		ap: _Browser_getScene(),
+		at: {
+			L: _Browser_window.pageXOffset,
+			M: _Browser_window.pageYOffset,
 			y: _Browser_doc.documentElement.clientWidth,
 			t: _Browser_doc.documentElement.clientHeight
 		}
@@ -4201,13 +4201,13 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ao: {
+			ap: {
 				y: node.scrollWidth,
 				t: node.scrollHeight
 			},
-			as: {
-				K: node.scrollLeft,
-				L: node.scrollTop,
+			at: {
+				L: node.scrollLeft,
+				M: node.scrollTop,
 				y: node.clientWidth,
 				t: node.clientHeight
 			}
@@ -4239,16 +4239,16 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ao: _Browser_getScene(),
-			as: {
-				K: x,
-				L: y,
+			ap: _Browser_getScene(),
+			at: {
+				L: x,
+				M: y,
 				y: _Browser_doc.documentElement.clientWidth,
 				t: _Browser_doc.documentElement.clientHeight
 			},
-			az: {
-				K: x + rect.left,
-				L: y + rect.top,
+			aA: {
+				L: x + rect.left,
+				M: y + rect.top,
 				y: rect.width,
 				t: rect.height
 			}
@@ -4369,49 +4369,7 @@ var $elm$core$Basics$apR = F2(
 	function (x, f) {
 		return f(x);
 	});
-var $author$project$Model$Player = F4(
-	function (name, position, side, gender) {
-		return {M: gender, ac: name, ah: position, ap: side};
-	});
-var $author$project$Model$Female = 0;
-var $author$project$Model$Male = 1;
-var $author$project$Model$decodeGender = function (s) {
-	switch (s) {
-		case 'female':
-			return 0;
-		case 'male':
-			return 1;
-		default:
-			return 0;
-	}
-};
-var $author$project$Model$Cutter = 1;
-var $author$project$Model$Handler = 0;
-var $author$project$Model$decodePosition = function (s) {
-	switch (s) {
-		case 'handler':
-			return 0;
-		case 'cutter':
-			return 1;
-		default:
-			return 0;
-	}
-};
-var $author$project$Model$Balanced = 2;
-var $author$project$Model$Defense = 1;
-var $author$project$Model$Offense = 0;
-var $author$project$Model$decodeSide = function (s) {
-	switch (s) {
-		case 'offense':
-			return 0;
-		case 'defense':
-			return 1;
-		case 'balanced':
-			return 2;
-		default:
-			return 2;
-	}
-};
+var $elm$core$Basics$False = 1;
 var $elm$core$Result$Err = function (a) {
 	return {$: 1, a: a};
 };
@@ -4433,7 +4391,6 @@ var $elm$core$Result$Ok = function (a) {
 var $elm$json$Json$Decode$OneOf = function (a) {
 	return {$: 2, a: a};
 };
-var $elm$core$Basics$False = 1;
 var $elm$core$Basics$add = _Basics_add;
 var $elm$core$Maybe$Just = function (a) {
 	return {$: 0, a: a};
@@ -4803,6 +4760,50 @@ var $elm$core$Result$isOk = function (result) {
 		return false;
 	}
 };
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $author$project$Model$Player = F4(
+	function (name, position, side, gender) {
+		return {N: gender, ad: name, ai: position, aq: side};
+	});
+var $author$project$Model$Female = 0;
+var $author$project$Model$Male = 1;
+var $author$project$Model$decodeGender = function (s) {
+	switch (s) {
+		case 'female':
+			return 0;
+		case 'male':
+			return 1;
+		default:
+			return 0;
+	}
+};
+var $author$project$Model$Cutter = 1;
+var $author$project$Model$Handler = 0;
+var $author$project$Model$decodePosition = function (s) {
+	switch (s) {
+		case 'handler':
+			return 0;
+		case 'cutter':
+			return 1;
+		default:
+			return 0;
+	}
+};
+var $author$project$Model$Balanced = 2;
+var $author$project$Model$Defense = 1;
+var $author$project$Model$Offense = 0;
+var $author$project$Model$decodeSide = function (s) {
+	switch (s) {
+		case 'offense':
+			return 0;
+		case 'defense':
+			return 1;
+		case 'balanced':
+			return 2;
+		default:
+			return 2;
+	}
+};
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$map = _Json_map1;
 var $elm$json$Json$Decode$map4 = _Json_map4;
@@ -4825,9 +4826,8 @@ var $author$project$Model$decodePlayer = A5(
 		A2($elm$json$Json$Decode$map, $author$project$Model$decodeGender, $elm$json$Json$Decode$string)));
 var $author$project$Model$Point = F2(
 	function (line, weScored) {
-		return {o: line, at: weScored};
+		return {o: line, au: weScored};
 	});
-var $elm$json$Json$Decode$bool = _Json_decodeBool;
 var $elm$core$Basics$identity = function (x) {
 	return x;
 };
@@ -4972,14 +4972,14 @@ var $author$project$Model$roster = $Gizra$elm_all_set$EverySet$fromList(
 			A4($author$project$Model$Player, 'Tomer', 0, 1, 1),
 			A4($author$project$Model$Player, 'Jackson', 0, 1, 1)
 		]));
-var $author$project$Model$initialGame = {o: $Gizra$elm_all_set$EverySet$empty, H: $Gizra$elm_all_set$EverySet$empty, I: $author$project$Model$roster, J: _List_Nil};
+var $author$project$Model$initialGame = {o: $Gizra$elm_all_set$EverySet$empty, I: $Gizra$elm_all_set$EverySet$empty, J: $author$project$Model$roster, K: _List_Nil};
 var $author$project$Model$decodeGame = A5(
 	$elm$json$Json$Decode$map4,
 	F4(
 		function (points, line, pendingLine, players) {
 			return _Utils_update(
 				$author$project$Model$initialGame,
-				{o: line, H: pendingLine, I: players, J: points});
+				{o: line, I: pendingLine, J: players, K: points});
 		}),
 	A2(
 		$elm$json$Json$Decode$field,
@@ -5009,24 +5009,33 @@ var $author$project$Model$decodeGame = A5(
 var $author$project$Model$initial = {
 	F: _List_fromArray(
 		[$author$project$Model$initialGame]),
-	G: 0
+	G: 0,
+	H: false
 };
 var $elm$json$Json$Decode$int = _Json_decodeInt;
-var $author$project$Model$decode = A3(
-	$elm$json$Json$Decode$map2,
-	F2(
-		function (games, idx) {
+var $elm$json$Json$Decode$map3 = _Json_map3;
+var $elm$json$Json$Decode$oneOf = _Json_oneOf;
+var $elm$json$Json$Decode$succeed = _Json_succeed;
+var $author$project$Model$decode = A4(
+	$elm$json$Json$Decode$map3,
+	F3(
+		function (games, idx, overview) {
 			return _Utils_update(
 				$author$project$Model$initial,
-				{F: games, G: idx});
+				{F: games, G: idx, H: overview});
 		}),
 	A2(
 		$elm$json$Json$Decode$field,
 		'games',
 		$elm$json$Json$Decode$list($author$project$Model$decodeGame)),
-	A2($elm$json$Json$Decode$field, 'index', $elm$json$Json$Decode$int));
+	A2($elm$json$Json$Decode$field, 'index', $elm$json$Json$Decode$int),
+	$elm$json$Json$Decode$oneOf(
+		_List_fromArray(
+			[
+				A2($elm$json$Json$Decode$field, 'overview', $elm$json$Json$Decode$bool),
+				$elm$json$Json$Decode$succeed(false)
+			])));
 var $elm$json$Json$Decode$decodeValue = _Json_run;
-var $elm$json$Json$Decode$succeed = _Json_succeed;
 var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	switch (handler.$) {
 		case 0:
@@ -5050,7 +5059,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {Z: fragment, _: host, ae: path, ag: port_, ak: protocol, al: query};
+		return {_: fragment, aa: host, af: path, ah: port_, al: protocol, am: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5280,6 +5289,7 @@ var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$batch(_List_Nil);
 };
+var $elm$json$Json$Encode$bool = _Json_wrap;
 var $author$project$Model$encodeGender = function (g) {
 	if (!g) {
 		return 'female';
@@ -5319,10 +5329,10 @@ var $elm$json$Json$Encode$object = function (pairs) {
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Model$encodePlayer = function (_v0) {
-	var name = _v0.ac;
-	var position = _v0.ah;
-	var side = _v0.ap;
-	var gender = _v0.M;
+	var name = _v0.ad;
+	var position = _v0.ai;
+	var side = _v0.aq;
+	var gender = _v0.N;
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
 			[
@@ -5343,7 +5353,6 @@ var $author$project$Model$encodePlayer = function (_v0) {
 					$author$project$Model$encodeGender(gender)))
 			]));
 };
-var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$json$Json$Encode$list = F2(
 	function (func, entries) {
 		return _Json_wrap(
@@ -5363,7 +5372,7 @@ var $Gizra$elm_all_set$EverySet$toList = function (_v0) {
 };
 var $author$project$Model$encodePoint = function (_v0) {
 	var line = _v0.o;
-	var weScored = _v0.at;
+	var weScored = _v0.au;
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
 			[
@@ -5384,7 +5393,7 @@ var $author$project$Model$encodeGame = function (game) {
 			[
 				_Utils_Tuple2(
 				'points',
-				A2($elm$json$Json$Encode$list, $author$project$Model$encodePoint, game.J)),
+				A2($elm$json$Json$Encode$list, $author$project$Model$encodePoint, game.K)),
 				_Utils_Tuple2(
 				'line',
 				A2(
@@ -5396,13 +5405,13 @@ var $author$project$Model$encodeGame = function (game) {
 				A2(
 					$elm$json$Json$Encode$list,
 					$author$project$Model$encodePlayer,
-					$Gizra$elm_all_set$EverySet$toList(game.H))),
+					$Gizra$elm_all_set$EverySet$toList(game.I))),
 				_Utils_Tuple2(
 				'players',
 				A2(
 					$elm$json$Json$Encode$list,
 					$author$project$Model$encodePlayer,
-					$Gizra$elm_all_set$EverySet$toList(game.I)))
+					$Gizra$elm_all_set$EverySet$toList(game.J)))
 			]));
 };
 var $elm$json$Json$Encode$int = _Json_wrap;
@@ -5419,7 +5428,10 @@ var $author$project$Model$encode = F2(
 						A2($elm$json$Json$Encode$list, $author$project$Model$encodeGame, model.F)),
 						_Utils_Tuple2(
 						'index',
-						$elm$json$Json$Encode$int(model.G))
+						$elm$json$Json$Encode$int(model.G)),
+						_Utils_Tuple2(
+						'overview',
+						$elm$json$Json$Encode$bool(model.H))
 					])));
 	});
 var $elm$json$Json$Encode$null = _Json_encodeNull;
@@ -5448,6 +5460,7 @@ var $author$project$Update$modifyAt = F3(
 			return _List_Nil;
 		}
 	});
+var $elm$core$Basics$not = _Basics_not;
 var $author$project$Update$save = _Platform_outgoingPort('save', $elm$json$Json$Encode$string);
 var $pzp1997$assoc_list$AssocList$isEmpty = function (dict) {
 	return _Utils_eq(dict, _List_Nil);
@@ -5482,38 +5495,38 @@ var $author$project$Update$updateGame = F2(
 				return _Utils_update(
 					model,
 					{
-						o: $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? $Gizra$elm_all_set$EverySet$empty : model.o,
-						H: $Gizra$elm_all_set$EverySet$empty,
-						J: A2(
+						o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? $Gizra$elm_all_set$EverySet$empty : model.o,
+						I: $Gizra$elm_all_set$EverySet$empty,
+						K: A2(
 							$elm$core$List$cons,
 							{
-								o: $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? model.o : model.H,
-								at: true
+								o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : model.I,
+								au: true
 							},
-							model.J)
+							model.K)
 					});
 			case 1:
 				return _Utils_update(
 					model,
 					{
-						o: $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? $Gizra$elm_all_set$EverySet$empty : model.o,
-						H: $Gizra$elm_all_set$EverySet$empty,
-						J: A2(
+						o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? $Gizra$elm_all_set$EverySet$empty : model.o,
+						I: $Gizra$elm_all_set$EverySet$empty,
+						K: A2(
 							$elm$core$List$cons,
 							{
-								o: $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? model.o : model.H,
-								at: false
+								o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : model.I,
+								au: false
 							},
-							model.J)
+							model.K)
 					});
 			case 4:
-				var _v1 = model.J;
+				var _v1 = model.K;
 				if (_v1.b) {
 					var x = _v1.a;
 					var xs = _v1.b;
 					return _Utils_update(
 						model,
-						{o: x.o, J: xs});
+						{o: x.o, K: xs});
 				} else {
 					return model;
 				}
@@ -5528,10 +5541,10 @@ var $author$project$Update$updateGame = F2(
 				return _Utils_update(
 					model,
 					{
-						o: $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? $Gizra$elm_all_set$EverySet$empty : model.H,
-						H: $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? model.o : $Gizra$elm_all_set$EverySet$empty
+						o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? $Gizra$elm_all_set$EverySet$empty : model.I,
+						I: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : $Gizra$elm_all_set$EverySet$empty
 					});
-			case 10:
+			case 11:
 				return model;
 			default:
 				return model;
@@ -5562,6 +5575,10 @@ var $author$project$Update$update = F2(
 								model.G + 1,
 								$elm$core$List$length(model.F) - 1)
 						});
+				case 10:
+					return _Utils_update(
+						model,
+						{H: !model.H});
 				default:
 					return _Utils_update(
 						model,
@@ -5580,10 +5597,11 @@ var $author$project$Update$update = F2(
 				A2($author$project$Model$encode, 2, model_)));
 	});
 var $elm$json$Json$Decode$value = _Json_decodeValue;
+var $author$project$Messages$Overview = {$: 10};
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $author$project$Messages$NewGame = {$: 5};
 var $author$project$Messages$NextGame = {$: 6};
 var $author$project$Messages$PrevGame = {$: 7};
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5648,7 +5666,7 @@ var $author$project$View$renderButton = F2(
 					$elm$html$Html$text(txt)
 				]));
 	});
-var $author$project$Messages$Noop = {$: 10};
+var $author$project$Messages$Noop = {$: 11};
 var $author$project$Messages$Pending = {$: 9};
 var $author$project$Messages$PickPlayer = function (a) {
 	return {$: 2, a: a};
@@ -5713,13 +5731,13 @@ var $author$project$View$lineGender = function (line) {
 		A2(
 			$Gizra$elm_all_set$EverySet$filter,
 			function (x) {
-				return x.M === 1;
+				return x.N === 1;
 			},
 			line)) >= 4) ? $elm$core$Maybe$Just(1) : (($Gizra$elm_all_set$EverySet$size(
 		A2(
 			$Gizra$elm_all_set$EverySet$filter,
 			function (x) {
-				return !x.M;
+				return !x.N;
 			},
 			line)) >= 4) ? $elm$core$Maybe$Just(0) : $elm$core$Maybe$Nothing);
 };
@@ -5727,10 +5745,10 @@ var $author$project$View$pointGender = function (point) {
 	return $author$project$View$lineGender(point.o);
 };
 var $author$project$View$currentGender = function (model) {
-	var _v0 = $Gizra$elm_all_set$EverySet$isEmpty(model.H) ? model.J : A2(
+	var _v0 = $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.K : A2(
 		$elm$core$List$cons,
-		{o: model.H, at: true},
-		model.J);
+		{o: model.I, au: true},
+		model.K);
 	if (!_v0.b) {
 		return $elm$core$Maybe$Nothing;
 	} else {
@@ -5786,7 +5804,6 @@ var $pzp1997$assoc_list$AssocList$member = F2(
 			return false;
 		}
 	});
-var $elm$core$Basics$not = _Basics_not;
 var $pzp1997$assoc_list$AssocList$diff = F2(
 	function (_v0, rightDict) {
 		var leftAlist = _v0;
@@ -5804,6 +5821,263 @@ var $Gizra$elm_all_set$EverySet$diff = F2(
 		var d2 = _v1;
 		return A2($pzp1997$assoc_list$AssocList$diff, d1, d2);
 	});
+var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
+var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
+var $author$project$View$combineStats = F2(
+	function (s1, s2) {
+		return {aC: s1.aC + s2.aC, aO: s1.aO + s2.aO};
+	});
+var $elm$core$Dict$Black = 1;
+var $elm$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {$: -1, a: a, b: b, c: c, d: d, e: e};
+	});
+var $elm$core$Dict$Red = 0;
+var $elm$core$Dict$balance = F5(
+	function (color, key, value, left, right) {
+		if ((right.$ === -1) && (!right.a)) {
+			var _v1 = right.a;
+			var rK = right.b;
+			var rV = right.c;
+			var rLeft = right.d;
+			var rRight = right.e;
+			if ((left.$ === -1) && (!left.a)) {
+				var _v3 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var lLeft = left.d;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					0,
+					key,
+					value,
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					rK,
+					rV,
+					A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, left, rLeft),
+					rRight);
+			}
+		} else {
+			if ((((left.$ === -1) && (!left.a)) && (left.d.$ === -1)) && (!left.d.a)) {
+				var _v5 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var _v6 = left.d;
+				var _v7 = _v6.a;
+				var llK = _v6.b;
+				var llV = _v6.c;
+				var llLeft = _v6.d;
+				var llRight = _v6.e;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					0,
+					lK,
+					lV,
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, llK, llV, llLeft, llRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, key, value, lRight, right));
+			} else {
+				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
+			}
+		}
+	});
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$insertHelp = F3(
+	function (key, value, dict) {
+		if (dict.$ === -2) {
+			return A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
+		} else {
+			var nColor = dict.a;
+			var nKey = dict.b;
+			var nValue = dict.c;
+			var nLeft = dict.d;
+			var nRight = dict.e;
+			var _v1 = A2($elm$core$Basics$compare, key, nKey);
+			switch (_v1) {
+				case 0:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						A3($elm$core$Dict$insertHelp, key, value, nLeft),
+						nRight);
+				case 1:
+					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
+				default:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						nLeft,
+						A3($elm$core$Dict$insertHelp, key, value, nRight));
+			}
+		}
+	});
+var $elm$core$Dict$insert = F3(
+	function (key, value, dict) {
+		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
+		if ((_v0.$ === -1) && (!_v0.a)) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, 1, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $elm$core$Dict$foldl = F3(
+	function (func, acc, dict) {
+		foldl:
+		while (true) {
+			if (dict.$ === -2) {
+				return acc;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var $temp$func = func,
+					$temp$acc = A3(
+					func,
+					key,
+					value,
+					A3($elm$core$Dict$foldl, func, acc, left)),
+					$temp$dict = right;
+				func = $temp$func;
+				acc = $temp$acc;
+				dict = $temp$dict;
+				continue foldl;
+			}
+		}
+	});
+var $elm$core$Dict$merge = F6(
+	function (leftStep, bothStep, rightStep, leftDict, rightDict, initialResult) {
+		var stepState = F3(
+			function (rKey, rValue, _v0) {
+				stepState:
+				while (true) {
+					var list = _v0.a;
+					var result = _v0.b;
+					if (!list.b) {
+						return _Utils_Tuple2(
+							list,
+							A3(rightStep, rKey, rValue, result));
+					} else {
+						var _v2 = list.a;
+						var lKey = _v2.a;
+						var lValue = _v2.b;
+						var rest = list.b;
+						if (_Utils_cmp(lKey, rKey) < 0) {
+							var $temp$rKey = rKey,
+								$temp$rValue = rValue,
+								$temp$_v0 = _Utils_Tuple2(
+								rest,
+								A3(leftStep, lKey, lValue, result));
+							rKey = $temp$rKey;
+							rValue = $temp$rValue;
+							_v0 = $temp$_v0;
+							continue stepState;
+						} else {
+							if (_Utils_cmp(lKey, rKey) > 0) {
+								return _Utils_Tuple2(
+									list,
+									A3(rightStep, rKey, rValue, result));
+							} else {
+								return _Utils_Tuple2(
+									rest,
+									A4(bothStep, lKey, lValue, rValue, result));
+							}
+						}
+					}
+				}
+			});
+		var _v3 = A3(
+			$elm$core$Dict$foldl,
+			stepState,
+			_Utils_Tuple2(
+				$elm$core$Dict$toList(leftDict),
+				initialResult),
+			rightDict);
+		var leftovers = _v3.a;
+		var intermediateResult = _v3.b;
+		return A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v4, result) {
+					var k = _v4.a;
+					var v = _v4.b;
+					return A3(leftStep, k, v, result);
+				}),
+			intermediateResult,
+			leftovers);
+	});
+var $author$project$View$mergeStats = F2(
+	function (a, b) {
+		return A6(
+			$elm$core$Dict$merge,
+			F3(
+				function (k, v, d) {
+					return A3($elm$core$Dict$insert, k, v, d);
+				}),
+			F4(
+				function (k, v1, v2, d) {
+					return A3(
+						$elm$core$Dict$insert,
+						k,
+						A2($author$project$View$combineStats, v1, v2),
+						d);
+				}),
+			F3(
+				function (k, v, d) {
+					return A3($elm$core$Dict$insert, k, v, d);
+				}),
+			a,
+			b,
+			$elm$core$Dict$empty);
+	});
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $author$project$View$pointStats = function (point) {
+	var stats = {
+		aC: (!point.au) ? 1 : 0,
+		aO: point.au ? 1 : 0
+	};
+	return $elm$core$Dict$fromList(
+		A2(
+			$elm$core$List$map,
+			function (p) {
+				return _Utils_Tuple2(p.ad, stats);
+			},
+			$Gizra$elm_all_set$EverySet$toList(point.o)));
+};
+var $author$project$View$gameStats = function (game) {
+	return A3(
+		$elm$core$List$foldr,
+		$author$project$View$mergeStats,
+		$elm$core$Dict$empty,
+		A2($elm$core$List$map, $author$project$View$pointStats, game.K));
+};
 var $author$project$View$limitForGender = F2(
 	function (model, gender) {
 		var _v0 = $author$project$View$currentGender(model);
@@ -5819,14 +6093,14 @@ var $author$project$View$isLineInvalid = function (model) {
 		A2(
 			$Gizra$elm_all_set$EverySet$filter,
 			function (x) {
-				return x.M === 1;
+				return x.N === 1;
 			},
 			model.o));
 	var numFemale = $Gizra$elm_all_set$EverySet$size(
 		A2(
 			$Gizra$elm_all_set$EverySet$filter,
 			function (x) {
-				return !x.M;
+				return !x.N;
 			},
 			model.o));
 	var maleLimit = A2($author$project$View$limitForGender, model, 1);
@@ -5990,13 +6264,13 @@ var $author$project$View$renderPlayer = F3(
 				},
 				A2($elm$core$List$take, 1, points)));
 		var opac = (twoPointCount === 2) ? '0.60' : ((onePointCount === 1) ? '0.70' : ((twoPointCount === 1) ? '0.80' : '1'));
-		var col = (p.M === 1) ? 'rgb(128,196,239)' : 'rgb(239,128,128)';
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('player'),
-					A2($elm$html$Html$Attributes$style, 'background-color', col),
+					$elm$html$Html$Attributes$class(
+					(p.N === 1) ? 'domcolored' : 'dowcolored'),
 					A2($elm$html$Html$Attributes$style, 'opacity', opac),
 					$elm$html$Html$Events$onClick(
 					msg(p))
@@ -6006,7 +6280,7 @@ var $author$project$View$renderPlayer = F3(
 					$elm$html$Html$text(
 					$elm$core$String$fromInt(totalPointCount)),
 					$elm$html$Html$text(' '),
-					$elm$html$Html$text(p.ac)
+					$elm$html$Html$text(p.ad)
 				]));
 	});
 var $author$project$View$renderPlayerList = F3(
@@ -6014,19 +6288,19 @@ var $author$project$View$renderPlayerList = F3(
 		var os = A2(
 			$elm$core$List$filter,
 			function (p) {
-				return !p.ap;
+				return !p.aq;
 			},
 			$Gizra$elm_all_set$EverySet$toList(ps));
 		var ms = A2(
 			$elm$core$List$filter,
 			function (p) {
-				return p.ap === 2;
+				return p.aq === 2;
 			},
 			$Gizra$elm_all_set$EverySet$toList(ps));
 		var ds = A2(
 			$elm$core$List$filter,
 			function (p) {
-				return p.ap === 1;
+				return p.aq === 1;
 			},
 			$Gizra$elm_all_set$EverySet$toList(ps));
 		return A2(
@@ -6078,7 +6352,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (!p.M) && (!p.ah);
+							return (!p.N) && (!p.ai);
 						},
 						ps)),
 					A3(
@@ -6088,7 +6362,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (!p.M) && (p.ah === 1);
+							return (!p.N) && (p.ai === 1);
 						},
 						ps)),
 					A3(
@@ -6098,7 +6372,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (p.M === 1) && (!p.ah);
+							return (p.N === 1) && (!p.ai);
 						},
 						ps)),
 					A3(
@@ -6108,7 +6382,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (p.M === 1) && (p.ah === 1);
+							return (p.N === 1) && (p.ai === 1);
 						},
 						ps))
 				]));
@@ -6130,14 +6404,14 @@ var $author$project$View$renderScore = function (ps) {
 		A2(
 			$elm$core$List$filter,
 			function (p) {
-				return p.at;
+				return p.au;
 			},
 			ps));
 	var oppScore = $elm$core$List$length(
 		A2(
 			$elm$core$List$filter,
 			function (p) {
-				return !p.at;
+				return !p.au;
 			},
 			ps));
 	return A2(
@@ -6211,7 +6485,149 @@ var $author$project$View$renderPoints = function (game) {
 			$elm$core$List$map,
 			$author$project$View$renderPoint,
 			$elm$core$List$reverse(
-				$author$project$View$enumerate(game.J))));
+				$author$project$View$enumerate(game.K))));
+};
+var $author$project$View$emptyStats = {aC: 0, aO: 0};
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === -2) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1) {
+					case 0:
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 1:
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
+var $author$project$View$percent = function (st) {
+	return ((st.aO > 0) || (st.aC > 0)) ? (st.aO / (st.aO + st.aC)) : 0;
+};
+var $elm$core$Basics$round = _Basics_round;
+var $author$project$View$renderPlayerStats = F2(
+	function (stats, player) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('player'),
+					$elm$html$Html$Attributes$class('stats-item'),
+					(player.N === 1) ? $elm$html$Html$Attributes$class('domcolored') : $elm$html$Html$Attributes$class('dowcolored')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(player.ad),
+					$elm$html$Html$text(' '),
+					$elm$html$Html$text(
+					$elm$core$String$fromInt(stats.aO)),
+					$elm$html$Html$text('/'),
+					$elm$html$Html$text(
+					$elm$core$String$fromInt(stats.aO + stats.aC)),
+					$elm$html$Html$text(' | '),
+					$elm$html$Html$text(
+					$elm$core$String$fromInt(
+						$elm$core$Basics$round(
+							$author$project$View$percent(stats) * 100)) + '%')
+				]));
+	});
+var $elm$core$List$sortBy = _List_sortBy;
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$View$renderStats = function (stats) {
+	var successSort = function (xs) {
+		return $elm$core$List$reverse(
+			A2(
+				$elm$core$List$sortBy,
+				function (p) {
+					var _v0 = A2($elm$core$Dict$get, p.ad, stats);
+					if (!_v0.$) {
+						var st = _v0.a;
+						return $author$project$View$percent(st);
+					} else {
+						return 0;
+					}
+				},
+				xs));
+	};
+	var dows = successSort(
+		A2(
+			$elm$core$List$filter,
+			function (p) {
+				return !p.N;
+			},
+			$Gizra$elm_all_set$EverySet$toList($author$project$Model$roster)));
+	var doms = successSort(
+		A2(
+			$elm$core$List$filter,
+			function (p) {
+				return p.N === 1;
+			},
+			$Gizra$elm_all_set$EverySet$toList($author$project$Model$roster)));
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('stats-list')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				A2(
+					$elm$core$List$map,
+					function (p) {
+						return A2(
+							$author$project$View$renderPlayerStats,
+							A2(
+								$elm$core$Maybe$withDefault,
+								$author$project$View$emptyStats,
+								A2($elm$core$Dict$get, p.ad, stats)),
+							p);
+					},
+					dows)),
+				A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				A2(
+					$elm$core$List$map,
+					function (p) {
+						return A2(
+							$author$project$View$renderPlayerStats,
+							A2(
+								$elm$core$Maybe$withDefault,
+								$author$project$View$emptyStats,
+								A2($elm$core$Dict$get, p.ad, stats)),
+							p);
+					},
+					doms))
+			]));
 };
 var $author$project$View$renderGame = function (model) {
 	return A2(
@@ -6228,8 +6644,11 @@ var $author$project$View$renderGame = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
+						$author$project$View$renderStats(
+						$author$project$View$gameStats(model)),
+						A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 						$author$project$View$renderPoints(model),
-						$Gizra$elm_all_set$EverySet$isEmpty(model.H) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
+						$Gizra$elm_all_set$EverySet$isEmpty(model.I) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
@@ -6242,11 +6661,11 @@ var $author$project$View$renderGame = function (model) {
 								A4(
 								$author$project$View$renderPlayersDivided,
 								false,
-								model.J,
+								model.K,
 								function (_v0) {
 									return $author$project$Messages$Noop;
 								},
-								model.H),
+								model.I),
 								A2($elm$html$Html$hr, _List_Nil, _List_Nil)
 							])),
 						A2(
@@ -6262,8 +6681,8 @@ var $author$project$View$renderGame = function (model) {
 								$author$project$View$isLineInvalid(model),
 								A2(
 									$elm$core$List$cons,
-									{o: model.H, at: true},
-									model.J),
+									{o: model.I, au: true},
+									model.K),
 								$author$project$Messages$RemovePlayer,
 								model.o),
 								A2($elm$html$Html$hr, _List_Nil, _List_Nil)
@@ -6281,7 +6700,7 @@ var $author$project$View$renderGame = function (model) {
 								A2($author$project$View$renderButton, 'Undo', $author$project$Messages$UndoPoint),
 								A2(
 								$author$project$View$renderButton,
-								$Gizra$elm_all_set$EverySet$isEmpty(model.H) ? 'Lock' : 'Unlock',
+								$Gizra$elm_all_set$EverySet$isEmpty(model.I) ? 'Lock' : 'Unlock',
 								$author$project$Messages$Pending)
 							])),
 						A2(
@@ -6318,15 +6737,15 @@ var $author$project$View$renderGame = function (model) {
 								false,
 								A2(
 									$elm$core$List$cons,
-									{o: model.H, at: true},
-									model.J),
+									{o: model.I, au: true},
+									model.K),
 								$author$project$Messages$PickPlayer,
-								A2($Gizra$elm_all_set$EverySet$diff, model.I, model.o))
+								A2($Gizra$elm_all_set$EverySet$diff, model.J, model.o))
 							]))
 					]))
 			]));
 };
-var $author$project$View$view = function (model) {
+var $author$project$View$gameView = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -6370,6 +6789,28 @@ var $author$project$View$view = function (model) {
 			}()
 			]));
 };
+var $author$project$View$modelStats = function (model) {
+	return A3(
+		$elm$core$List$foldr,
+		$author$project$View$mergeStats,
+		$elm$core$Dict$empty,
+		A2($elm$core$List$map, $author$project$View$gameStats, model.F));
+};
+var $author$project$View$view = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$author$project$View$renderButton,
+				model.H ? 'Games' : 'Overview',
+				$author$project$Messages$Overview),
+				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
+				model.H ? $author$project$View$renderStats(
+				$author$project$View$modelStats(model)) : $author$project$View$gameView(model)
+			]));
+};
 var $elm$core$Result$withDefault = F2(
 	function (def, result) {
 		if (!result.$) {
@@ -6381,7 +6822,7 @@ var $elm$core$Result$withDefault = F2(
 	});
 var $author$project$Main$main = $elm$browser$Browser$element(
 	{
-		aE: function (value) {
+		aG: function (value) {
 			return _Utils_Tuple2(
 				A2(
 					$elm$core$Result$withDefault,
@@ -6389,8 +6830,8 @@ var $author$project$Main$main = $elm$browser$Browser$element(
 					A2($elm$json$Json$Decode$decodeValue, $author$project$Model$decode, value)),
 				$elm$core$Platform$Cmd$none);
 		},
-		aL: $author$project$Main$subscriptions,
-		aO: $author$project$Update$update,
-		aP: $author$project$View$view
+		aN: $author$project$Main$subscriptions,
+		aR: $author$project$Update$update,
+		aS: $author$project$View$view
 	});
 _Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));

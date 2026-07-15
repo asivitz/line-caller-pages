@@ -68,3 +68,33 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.stats-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats-list > div {
+  margin-right: 1em;
+}
+
+.stats-item {
+}
+
+.domcolored {
+  background-color: rgb(128,196,239);
+}
+
+.dowcolored {
+  background-color: rgb(239,128,128);
+}
+
+.flash {
+    animation: flash-red 200ms;
+}
+
+@keyframes flash-red {
+    0%   { background: transparent; }
+    50%  { background: #f88; }
+    100% { background: transparent; }
+}
