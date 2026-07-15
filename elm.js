@@ -5435,6 +5435,11 @@ var $author$project$Model$encode = F2(
 					])));
 	});
 var $elm$json$Json$Encode$null = _Json_encodeNull;
+var $author$project$Update$exportState = _Platform_outgoingPort(
+	'exportState',
+	function ($) {
+		return $elm$json$Json$Encode$null;
+	});
 var $author$project$Update$flashRed = _Platform_outgoingPort(
 	'flashRed',
 	function ($) {
@@ -5544,7 +5549,7 @@ var $author$project$Update$updateGame = F2(
 						o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? $Gizra$elm_all_set$EverySet$empty : model.I,
 						I: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : $Gizra$elm_all_set$EverySet$empty
 					});
-			case 11:
+			case 12:
 				return model;
 			default:
 				return model;
@@ -5593,16 +5598,18 @@ var $author$project$Update$update = F2(
 		}();
 		return _Utils_Tuple2(
 			model_,
-			_Utils_eq(model_, model) ? $author$project$Update$flashRed(0) : $author$project$Update$save(
-				A2($author$project$Model$encode, 2, model_)));
+			function () {
+				if (msg.$ === 11) {
+					return $author$project$Update$exportState(0);
+				} else {
+					return _Utils_eq(model_, model) ? $author$project$Update$flashRed(0) : $author$project$Update$save(
+						A2($author$project$Model$encode, 2, model_));
+				}
+			}());
 	});
 var $elm$json$Json$Decode$value = _Json_decodeValue;
+var $author$project$Messages$ExportState = {$: 11};
 var $author$project$Messages$Overview = {$: 10};
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Messages$NewGame = {$: 5};
-var $author$project$Messages$NextGame = {$: 6};
-var $author$project$Messages$PrevGame = {$: 7};
-var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -5610,6 +5617,12 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Messages$NewGame = {$: 5};
+var $author$project$Messages$NextGame = {$: 6};
+var $author$project$Messages$PrevGame = {$: 7};
+var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $author$project$View$pick = F2(
 	function (i, l) {
@@ -5632,7 +5645,6 @@ var $author$project$View$pick = F2(
 			}
 		}
 	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 0, a: a};
 };
@@ -5666,7 +5678,7 @@ var $author$project$View$renderButton = F2(
 					$elm$html$Html$text(txt)
 				]));
 	});
-var $author$project$Messages$Noop = {$: 11};
+var $author$project$Messages$Noop = {$: 12};
 var $author$project$Messages$Pending = {$: 9};
 var $author$project$Messages$PickPlayer = function (a) {
 	return {$: 2, a: a};
@@ -6803,9 +6815,19 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$author$project$View$renderButton,
-				model.H ? 'Games' : 'Overview',
-				$author$project$Messages$Overview),
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('buttons')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$author$project$View$renderButton,
+						model.H ? 'Games' : 'Overview',
+						$author$project$Messages$Overview),
+						A2($author$project$View$renderButton, 'Export', $author$project$Messages$ExportState)
+					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				model.H ? $author$project$View$renderStats(
 				$author$project$View$modelStats(model)) : $author$project$View$gameView(model)
