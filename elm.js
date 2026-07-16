@@ -5311,10 +5311,25 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$element = _Browser_element;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $author$project$Main$subscriptions = function (model) {
-	return $elm$core$Platform$Sub$batch(_List_Nil);
+var $author$project$Messages$ImportedState = function (a) {
+	return {$: 13, a: a};
 };
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $author$project$Main$importState = _Platform_incomingPort('importState', $elm$json$Json$Decode$string);
+var $author$project$Main$subscriptions = function (model) {
+	return $elm$core$Platform$Sub$batch(
+		_List_fromArray(
+			[
+				$author$project$Main$importState($author$project$Messages$ImportedState)
+			]));
+};
+var $elm$json$Json$Encode$null = _Json_encodeNull;
+var $author$project$Update$chooseImportFile = _Platform_outgoingPort(
+	'chooseImportFile',
+	function ($) {
+		return $elm$json$Json$Encode$null;
+	});
+var $elm$json$Json$Decode$decodeString = _Json_runOnString;
 var $elm$json$Json$Encode$bool = _Json_wrap;
 var $author$project$Model$encodeGender = function (g) {
 	if (!g) {
@@ -5472,7 +5487,6 @@ var $author$project$Model$encode = F2(
 							$Gizra$elm_all_set$EverySet$toList(model.N)))
 					])));
 	});
-var $elm$json$Json$Encode$null = _Json_encodeNull;
 var $author$project$Update$exportState = _Platform_outgoingPort(
 	'exportState',
 	function ($) {
@@ -5625,7 +5639,7 @@ var $author$project$Update$updateGame = F2(
 						o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? $Gizra$elm_all_set$EverySet$empty : model.I,
 						I: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : $Gizra$elm_all_set$EverySet$empty
 					});
-			case 14:
+			case 16:
 				return model;
 			default:
 				return model;
@@ -5660,20 +5674,30 @@ var $author$project$Update$update = F2(
 					return _Utils_update(
 						model,
 						{H: !model.H});
-				case 12:
+				case 14:
 					var name = msg.a;
 					return _Utils_update(
 						model,
 						{
 							O: A2($Gizra$elm_all_set$EverySet$member, name, model.O) ? A2($Gizra$elm_all_set$EverySet$remove, name, model.O) : A2($Gizra$elm_all_set$EverySet$insert, name, model.O)
 						});
-				case 13:
+				case 15:
 					var i = msg.a;
 					return _Utils_update(
 						model,
 						{
 							N: A2($Gizra$elm_all_set$EverySet$member, i, model.N) ? A2($Gizra$elm_all_set$EverySet$remove, i, model.N) : A2($Gizra$elm_all_set$EverySet$insert, i, model.N)
 						});
+				case 13:
+					var json = msg.a;
+					var _v2 = A2($elm$json$Json$Decode$decodeString, $author$project$Model$decode, json);
+					if (!_v2.$) {
+						var newModel = _v2.a;
+						return newModel;
+					} else {
+						var err = _v2.a;
+						return model;
+					}
 				default:
 					return _Utils_update(
 						model,
@@ -5689,19 +5713,23 @@ var $author$project$Update$update = F2(
 		return _Utils_Tuple2(
 			model_,
 			function () {
-				if (msg.$ === 11) {
-					return $author$project$Update$exportState(0);
-				} else {
-					return _Utils_eq(model_, model) ? $author$project$Update$flashRed(0) : $author$project$Update$save(
-						A2($author$project$Model$encode, 2, model_));
+				switch (msg.$) {
+					case 11:
+						return $author$project$Update$exportState(0);
+					case 12:
+						return $author$project$Update$chooseImportFile(0);
+					default:
+						return _Utils_eq(model_, model) ? $author$project$Update$flashRed(0) : $author$project$Update$save(
+							A2($author$project$Model$encode, 2, model_));
 				}
 			}());
 	});
 var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $author$project$Messages$ExportState = {$: 11};
 var $author$project$Messages$FlipGameExcludeFromStats = function (a) {
-	return {$: 13, a: a};
+	return {$: 15, a: a};
 };
+var $author$project$Messages$ImportState = {$: 12};
 var $author$project$Messages$Overview = {$: 10};
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5785,7 +5813,7 @@ var $author$project$View$renderButton = F2(
 					$elm$html$Html$text(txt)
 				]));
 	});
-var $author$project$Messages$Noop = {$: 14};
+var $author$project$Messages$Noop = {$: 16};
 var $author$project$Messages$Pending = {$: 9};
 var $author$project$Messages$PickPlayer = function (a) {
 	return {$: 2, a: a};
@@ -6639,7 +6667,7 @@ var $author$project$View$percent = function (st) {
 	return ((st.aQ > 0) || (st.aE > 0)) ? (st.aQ / (st.aQ + st.aE)) : 0;
 };
 var $author$project$Messages$FlipPlayerExcludeFromStats = function (a) {
-	return {$: 12, a: a};
+	return {$: 14, a: a};
 };
 var $elm$core$Basics$round = _Basics_round;
 var $author$project$View$renderPlayerStats = F3(
@@ -6982,7 +7010,8 @@ var $author$project$View$view = function (model) {
 						$author$project$View$renderButton,
 						model.H ? 'Games' : 'Overview',
 						$author$project$Messages$Overview),
-						A2($author$project$View$renderButton, 'Export', $author$project$Messages$ExportState)
+						A2($author$project$View$renderButton, 'Export', $author$project$Messages$ExportState),
+						A2($author$project$View$renderButton, 'Import', $author$project$Messages$ImportState)
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				model.H ? A2(
