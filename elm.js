@@ -4947,10 +4947,10 @@ var $author$project$Model$roster = $Gizra$elm_all_set$EverySet$fromList(
 	_List_fromArray(
 		[
 			A4($author$project$Model$Player, 'Maya', 0, 0, 0),
-			A4($author$project$Model$Player, 'Coco', 1, 0, 0),
 			A4($author$project$Model$Player, 'Emy', 1, 0, 0),
 			A4($author$project$Model$Player, 'Chip', 1, 0, 0),
 			A4($author$project$Model$Player, 'Abby', 1, 0, 0),
+			A4($author$project$Model$Player, 'Shorb', 1, 0, 0),
 			A4($author$project$Model$Player, 'Rob', 0, 0, 1),
 			A4($author$project$Model$Player, 'Walden', 0, 0, 1),
 			A4($author$project$Model$Player, 'Joseph', 0, 0, 1),
@@ -4962,7 +4962,7 @@ var $author$project$Model$roster = $Gizra$elm_all_set$EverySet$fromList(
 			A4($author$project$Model$Player, 'Juice', 0, 1, 0),
 			A4($author$project$Model$Player, 'Liz', 1, 1, 0),
 			A4($author$project$Model$Player, 'Saj', 1, 1, 0),
-			A4($author$project$Model$Player, 'Shorb', 1, 1, 0),
+			A4($author$project$Model$Player, 'Coco', 1, 1, 0),
 			A4($author$project$Model$Player, 'Red', 1, 1, 0),
 			A4($author$project$Model$Player, 'Tomer', 0, 1, 1),
 			A4($author$project$Model$Player, 'Jackson', 0, 1, 1),
