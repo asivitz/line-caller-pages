@@ -586,11 +586,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.U.o === region._.o)
+	if (region.U.o === region.aa.o)
 	{
 		return 'on line ' + region.U.o;
 	}
-	return 'on lines ' + region.U.o + ' through ' + region._.o;
+	return 'on lines ' + region.U.o + ' through ' + region.aa.o;
 }
 
 
@@ -1841,9 +1841,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aI,
-		impl.aT,
-		impl.aP,
+		impl.aJ,
+		impl.aU,
+		impl.aQ,
 		function() { return function() {} }
 	);
 });
@@ -3863,11 +3863,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aI,
-		impl.aT,
-		impl.aP,
+		impl.aJ,
+		impl.aU,
+		impl.aQ,
 		function(sendToApp, initialModel) {
-			var view = impl.aU;
+			var view = impl.aV;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3899,12 +3899,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aI,
-		impl.aT,
-		impl.aP,
+		impl.aJ,
+		impl.aU,
+		impl.aQ,
 		function(sendToApp, initialModel) {
 			var divertHrefToApp = impl.T && impl.T(sendToApp)
-			var view = impl.aU;
+			var view = impl.aV;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3912,12 +3912,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.az);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aA);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aS) && (_VirtualDom_doc.title = title = doc.aS);
+				(title !== doc.aT) && (_VirtualDom_doc.title = title = doc.aT);
 			});
 		}
 	);
@@ -3968,8 +3968,8 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.aJ;
-	var onUrlRequest = impl.aK;
+	var onUrlChange = impl.aK;
+	var onUrlRequest = impl.aL;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
@@ -3989,9 +3989,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.an === next.an
-							&& curr.ac === next.ac
-							&& curr.aj.a === next.aj.a
+							&& curr.ao === next.ao
+							&& curr.ad === next.ad
+							&& curr.ak.a === next.ak.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -3999,13 +3999,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		aI: function(flags)
+		aJ: function(flags)
 		{
-			return A3(impl.aI, flags, _Browser_getUrl(), key);
+			return A3(impl.aJ, flags, _Browser_getUrl(), key);
 		},
+		aV: impl.aV,
 		aU: impl.aU,
-		aT: impl.aT,
-		aP: impl.aP
+		aQ: impl.aQ
 	});
 }
 
@@ -4071,17 +4071,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { aG: 'hidden', A: 'visibilitychange' }
+		? { aH: 'hidden', A: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { aG: 'mozHidden', A: 'mozvisibilitychange' }
+		? { aH: 'mozHidden', A: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { aG: 'msHidden', A: 'msvisibilitychange' }
+		? { aH: 'msHidden', A: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { aG: 'webkitHidden', A: 'webkitvisibilitychange' }
-		: { aG: 'hidden', A: 'visibilitychange' };
+		? { aH: 'webkitHidden', A: 'webkitvisibilitychange' }
+		: { aH: 'hidden', A: 'visibilitychange' };
 }
 
 
@@ -4162,8 +4162,8 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		ar: _Browser_getScene(),
-		av: {
+		as: _Browser_getScene(),
+		aw: {
 			L: _Browser_window.pageXOffset,
 			M: _Browser_window.pageYOffset,
 			y: _Browser_doc.documentElement.clientWidth,
@@ -4201,11 +4201,11 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			ar: {
+			as: {
 				y: node.scrollWidth,
 				t: node.scrollHeight
 			},
-			av: {
+			aw: {
 				L: node.scrollLeft,
 				M: node.scrollTop,
 				y: node.clientWidth,
@@ -4239,14 +4239,14 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			ar: _Browser_getScene(),
-			av: {
+			as: _Browser_getScene(),
+			aw: {
 				L: x,
 				M: y,
 				y: _Browser_doc.documentElement.clientWidth,
 				t: _Browser_doc.documentElement.clientHeight
 			},
-			aC: {
+			aD: {
 				L: x + rect.left,
 				M: y + rect.top,
 				y: rect.width,
@@ -4763,7 +4763,7 @@ var $elm$core$Result$isOk = function (result) {
 var $elm$json$Json$Decode$bool = _Json_decodeBool;
 var $author$project$Model$Player = F4(
 	function (name, position, side, gender) {
-		return {P: gender, af: name, ak: position, as: side};
+		return {P: gender, ag: name, al: position, at: side};
 	});
 var $author$project$Model$Female = 0;
 var $author$project$Model$Male = 1;
@@ -4826,7 +4826,7 @@ var $author$project$Model$decodePlayer = A5(
 		A2($elm$json$Json$Decode$map, $author$project$Model$decodeGender, $elm$json$Json$Decode$string)));
 var $author$project$Model$Point = F2(
 	function (line, weScored) {
-		return {o: line, aw: weScored};
+		return {o: line, ax: weScored};
 	});
 var $elm$core$Basics$identity = function (x) {
 	return x;
@@ -4946,32 +4946,22 @@ var $author$project$Model$decodePoint = A3(
 var $author$project$Model$roster = $Gizra$elm_all_set$EverySet$fromList(
 	_List_fromArray(
 		[
-			A4($author$project$Model$Player, 'Maya', 0, 0, 0),
-			A4($author$project$Model$Player, 'Emy', 1, 0, 0),
-			A4($author$project$Model$Player, 'Chip', 1, 0, 0),
-			A4($author$project$Model$Player, 'Abby', 1, 0, 0),
-			A4($author$project$Model$Player, 'Shorb', 1, 0, 0),
-			A4($author$project$Model$Player, 'Rob', 0, 0, 1),
-			A4($author$project$Model$Player, 'Walden', 0, 0, 1),
-			A4($author$project$Model$Player, 'Joseph', 0, 0, 1),
-			A4($author$project$Model$Player, 'Alex', 1, 0, 1),
-			A4($author$project$Model$Player, 'Man', 1, 0, 1),
-			A4($author$project$Model$Player, 'Kevin', 1, 0, 1),
-			A4($author$project$Model$Player, 'Beanie', 0, 1, 0),
-			A4($author$project$Model$Player, 'Jenny', 0, 1, 0),
-			A4($author$project$Model$Player, 'Juice', 0, 1, 0),
-			A4($author$project$Model$Player, 'Liz', 1, 1, 0),
-			A4($author$project$Model$Player, 'Saj', 1, 1, 0),
-			A4($author$project$Model$Player, 'Coco', 1, 1, 0),
-			A4($author$project$Model$Player, 'Red', 1, 1, 0),
-			A4($author$project$Model$Player, 'Tomer', 0, 1, 1),
-			A4($author$project$Model$Player, 'Jackson', 0, 1, 1),
-			A4($author$project$Model$Player, 'Kyle', 0, 1, 1),
-			A4($author$project$Model$Player, 'Bobby', 1, 1, 1),
-			A4($author$project$Model$Player, 'Abe', 1, 1, 1),
-			A4($author$project$Model$Player, 'Sean', 1, 1, 1),
-			A4($author$project$Model$Player, 'Eric', 1, 1, 1),
-			A4($author$project$Model$Player, 'Varun', 1, 1, 1)
+			A4($author$project$Model$Player, 'Kyle', 0, 0, 1),
+			A4($author$project$Model$Player, 'Anania', 0, 0, 1),
+			A4($author$project$Model$Player, 'Ben', 0, 0, 1),
+			A4($author$project$Model$Player, 'Durgan', 1, 0, 1),
+			A4($author$project$Model$Player, 'Yusuf', 1, 0, 1),
+			A4($author$project$Model$Player, 'Eric', 1, 0, 1),
+			A4($author$project$Model$Player, 'Agastya', 1, 0, 1),
+			A4($author$project$Model$Player, 'Bowen', 0, 1, 1),
+			A4($author$project$Model$Player, 'Will', 0, 1, 1),
+			A4($author$project$Model$Player, 'Rich', 0, 1, 1),
+			A4($author$project$Model$Player, 'Zach', 0, 1, 1),
+			A4($author$project$Model$Player, 'Jeremy', 1, 1, 1),
+			A4($author$project$Model$Player, 'Declan', 1, 1, 1),
+			A4($author$project$Model$Player, 'Zhekai', 1, 1, 1),
+			A4($author$project$Model$Player, 'Omar', 1, 1, 1),
+			A4($author$project$Model$Player, 'Owen', 1, 1, 1)
 		]));
 var $author$project$Model$initialGame = {o: $Gizra$elm_all_set$EverySet$empty, I: $Gizra$elm_all_set$EverySet$empty, J: $author$project$Model$roster, K: _List_Nil};
 var $author$project$Model$decodeGame = A5(
@@ -5008,6 +4998,7 @@ var $author$project$Model$decodeGame = A5(
 			$Gizra$elm_all_set$EverySet$fromList,
 			$elm$json$Json$Decode$list($author$project$Model$decodePlayer))));
 var $author$project$Model$initial = {
+	Y: false,
 	N: $Gizra$elm_all_set$EverySet$empty,
 	O: $Gizra$elm_all_set$EverySet$empty,
 	F: _List_fromArray(
@@ -5086,7 +5077,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {ab: fragment, ac: host, ah: path, aj: port_, an: protocol, ao: query};
+		return {ac: fragment, ad: host, ai: path, ak: port_, ao: protocol, ap: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5371,9 +5362,9 @@ var $elm$json$Json$Encode$object = function (pairs) {
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Model$encodePlayer = function (_v0) {
-	var name = _v0.af;
-	var position = _v0.ak;
-	var side = _v0.as;
+	var name = _v0.ag;
+	var position = _v0.al;
+	var side = _v0.at;
 	var gender = _v0.P;
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
@@ -5414,7 +5405,7 @@ var $Gizra$elm_all_set$EverySet$toList = function (_v0) {
 };
 var $author$project$Model$encodePoint = function (_v0) {
 	var line = _v0.o;
-	var weScored = _v0.aw;
+	var weScored = _v0.ax;
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
 			[
@@ -5597,7 +5588,7 @@ var $author$project$Update$updateGame = F2(
 							$elm$core$List$cons,
 							{
 								o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : model.I,
-								aw: true
+								ax: true
 							},
 							model.K)
 					});
@@ -5611,7 +5602,7 @@ var $author$project$Update$updateGame = F2(
 							$elm$core$List$cons,
 							{
 								o: $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.o : model.I,
-								aw: false
+								ax: false
 							},
 							model.K)
 					});
@@ -5654,18 +5645,21 @@ var $author$project$Update$update = F2(
 					return _Utils_update(
 						model,
 						{
+							Y: false,
 							F: A2($elm$core$List$cons, $author$project$Model$initialGame, model.F)
 						});
 				case 6:
 					return _Utils_update(
 						model,
 						{
+							Y: false,
 							G: A2($elm$core$Basics$max, model.G - 1, 0)
 						});
 				case 7:
 					return _Utils_update(
 						model,
 						{
+							Y: false,
 							G: A2(
 								$elm$core$Basics$min,
 								model.G + 1,
@@ -5674,7 +5668,13 @@ var $author$project$Update$update = F2(
 				case 10:
 					return _Utils_update(
 						model,
-						{H: !model.H});
+						{Y: false, H: !model.H});
+				case 17:
+					return _Utils_update(
+						model,
+						{Y: true});
+				case 18:
+					return $author$project$Model$initial;
 				case 14:
 					var name = msg.a;
 					return _Utils_update(
@@ -5703,6 +5703,7 @@ var $author$project$Update$update = F2(
 					return _Utils_update(
 						model,
 						{
+							Y: false,
 							F: A3(
 								$author$project$Update$modifyAt,
 								$author$project$Update$updateGame(msg),
@@ -5726,6 +5727,8 @@ var $author$project$Update$update = F2(
 			}());
 	});
 var $elm$json$Json$Decode$value = _Json_decodeValue;
+var $author$project$Messages$Clear = {$: 17};
+var $author$project$Messages$ClearConfirm = {$: 18};
 var $author$project$Messages$ExportState = {$: 11};
 var $author$project$Messages$FlipGameExcludeFromStats = function (a) {
 	return {$: 15, a: a};
@@ -5825,99 +5828,8 @@ var $author$project$Messages$RemovePlayer = function (a) {
 var $author$project$Messages$TheyScored = {$: 1};
 var $author$project$Messages$UndoPoint = {$: 4};
 var $author$project$Messages$WeScored = {$: 0};
-var $author$project$View$flipGender = function (x) {
-	if (x === 1) {
-		return 0;
-	} else {
-		return 1;
-	}
-};
-var $elm$core$Maybe$map = F2(
-	function (f, maybe) {
-		if (!maybe.$) {
-			var value = maybe.a;
-			return $elm$core$Maybe$Just(
-				f(value));
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
-var $pzp1997$assoc_list$AssocList$filter = F2(
-	function (isGood, _v0) {
-		var alist = _v0;
-		return A2(
-			$elm$core$List$filter,
-			function (_v1) {
-				var key = _v1.a;
-				var value = _v1.b;
-				return A2(isGood, key, value);
-			},
-			alist);
-	});
-var $Gizra$elm_all_set$EverySet$filter = F2(
-	function (p, _v0) {
-		var d = _v0;
-		return A2(
-			$pzp1997$assoc_list$AssocList$filter,
-			F2(
-				function (k, _v1) {
-					return p(k);
-				}),
-			d);
-	});
-var $elm$core$Basics$ge = _Utils_ge;
-var $pzp1997$assoc_list$AssocList$size = function (_v0) {
-	var alist = _v0;
-	return $elm$core$List$length(alist);
-};
-var $Gizra$elm_all_set$EverySet$size = function (_v0) {
-	var d = _v0;
-	return $pzp1997$assoc_list$AssocList$size(d);
-};
-var $author$project$View$lineGender = function (line) {
-	return ($Gizra$elm_all_set$EverySet$size(
-		A2(
-			$Gizra$elm_all_set$EverySet$filter,
-			function (x) {
-				return x.P === 1;
-			},
-			line)) >= 4) ? $elm$core$Maybe$Just(1) : (($Gizra$elm_all_set$EverySet$size(
-		A2(
-			$Gizra$elm_all_set$EverySet$filter,
-			function (x) {
-				return !x.P;
-			},
-			line)) >= 4) ? $elm$core$Maybe$Just(0) : $elm$core$Maybe$Nothing);
-};
-var $author$project$View$pointGender = function (point) {
-	return $author$project$View$lineGender(point.o);
-};
 var $author$project$View$currentGender = function (model) {
-	var _v0 = $Gizra$elm_all_set$EverySet$isEmpty(model.I) ? model.K : A2(
-		$elm$core$List$cons,
-		{o: model.I, aw: true},
-		model.K);
-	if (!_v0.b) {
-		return $elm$core$Maybe$Nothing;
-	} else {
-		if (!_v0.b.b) {
-			var point = _v0.a;
-			return A2(
-				$elm$core$Maybe$map,
-				$author$project$View$flipGender,
-				$author$project$View$pointGender(point));
-		} else {
-			var one = _v0.a;
-			var _v1 = _v0.b;
-			var two = _v1.a;
-			return _Utils_eq(
-				$author$project$View$pointGender(one),
-				$author$project$View$pointGender(two)) ? A2(
-				$elm$core$Maybe$map,
-				$author$project$View$flipGender,
-				$author$project$View$pointGender(one)) : $author$project$View$pointGender(one);
-		}
-	}
+	return $elm$core$Maybe$Just(1);
 };
 var $pzp1997$assoc_list$AssocList$diff = F2(
 	function (_v0, rightDict) {
@@ -5940,7 +5852,7 @@ var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
 var $author$project$View$combineStats = F2(
 	function (s1, s2) {
-		return {aE: s1.aE + s2.aE, aQ: s1.aQ + s2.aQ};
+		return {aF: s1.aF + s2.aF, aR: s1.aR + s2.aR};
 	});
 var $elm$core$Dict$Black = 1;
 var $elm$core$Dict$RBNode_elm_builtin = F5(
@@ -6199,20 +6111,20 @@ var $author$project$View$pointStats = F2(
 		if (A2(
 			$elm$core$List$any,
 			function (p) {
-				return A2($Gizra$elm_all_set$EverySet$member, p.af, playerExcludes);
+				return A2($Gizra$elm_all_set$EverySet$member, p.ag, playerExcludes);
 			},
 			$Gizra$elm_all_set$EverySet$toList(point.o))) {
 			return $elm$core$Dict$empty;
 		} else {
 			var stats = {
-				aE: (!point.aw) ? 1 : 0,
-				aQ: point.aw ? 1 : 0
+				aF: (!point.ax) ? 1 : 0,
+				aR: point.ax ? 1 : 0
 			};
 			return $elm$core$Dict$fromList(
 				A2(
 					$elm$core$List$map,
 					function (p) {
-						return _Utils_Tuple2(p.af, stats);
+						return _Utils_Tuple2(p.ag, stats);
 					},
 					$Gizra$elm_all_set$EverySet$toList(point.o)));
 		}
@@ -6228,16 +6140,41 @@ var $author$project$View$gameStats = F2(
 				$author$project$View$pointStats(playerExcludes),
 				game.K));
 	});
+var $pzp1997$assoc_list$AssocList$filter = F2(
+	function (isGood, _v0) {
+		var alist = _v0;
+		return A2(
+			$elm$core$List$filter,
+			function (_v1) {
+				var key = _v1.a;
+				var value = _v1.b;
+				return A2(isGood, key, value);
+			},
+			alist);
+	});
+var $Gizra$elm_all_set$EverySet$filter = F2(
+	function (p, _v0) {
+		var d = _v0;
+		return A2(
+			$pzp1997$assoc_list$AssocList$filter,
+			F2(
+				function (k, _v1) {
+					return p(k);
+				}),
+			d);
+	});
 var $author$project$View$limitForGender = F2(
 	function (model, gender) {
-		var _v0 = $author$project$View$currentGender(model);
-		if (_v0.$ === 1) {
-			return 4;
-		} else {
-			var g = _v0.a;
-			return _Utils_eq(g, gender) ? 4 : 3;
-		}
+		return 7;
 	});
+var $pzp1997$assoc_list$AssocList$size = function (_v0) {
+	var alist = _v0;
+	return $elm$core$List$length(alist);
+};
+var $Gizra$elm_all_set$EverySet$size = function (_v0) {
+	var d = _v0;
+	return $pzp1997$assoc_list$AssocList$size(d);
+};
 var $author$project$View$isLineInvalid = function (model) {
 	var numMale = $Gizra$elm_all_set$EverySet$size(
 		A2(
@@ -6425,29 +6362,11 @@ var $author$project$View$renderPlayer = F3(
 					$elm$html$Html$text(
 					$elm$core$String$fromInt(totalPointCount)),
 					$elm$html$Html$text(' '),
-					$elm$html$Html$text(p.af)
+					$elm$html$Html$text(p.ag)
 				]));
 	});
 var $author$project$View$renderPlayerList = F3(
 	function (points, msg, ps) {
-		var os = A2(
-			$elm$core$List$filter,
-			function (p) {
-				return !p.as;
-			},
-			$Gizra$elm_all_set$EverySet$toList(ps));
-		var ms = A2(
-			$elm$core$List$filter,
-			function (p) {
-				return p.as === 2;
-			},
-			$Gizra$elm_all_set$EverySet$toList(ps));
-		var ds = A2(
-			$elm$core$List$filter,
-			function (p) {
-				return p.as === 1;
-			},
-			$Gizra$elm_all_set$EverySet$toList(ps));
 		return A2(
 			$elm$html$Html$div,
 			_List_fromArray(
@@ -6462,21 +6381,7 @@ var $author$project$View$renderPlayerList = F3(
 					A2(
 						$elm$core$List$map,
 						A2($author$project$View$renderPlayer, points, msg),
-						os)),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						A2($author$project$View$renderPlayer, points, msg),
-						ms)),
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						A2($author$project$View$renderPlayer, points, msg),
-						ds))
+						$Gizra$elm_all_set$EverySet$toList(ps)))
 				]));
 	});
 var $author$project$View$renderPlayersDivided = F4(
@@ -6497,7 +6402,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (!p.P) && (!p.ak);
+							return (!p.at) && (!p.al);
 						},
 						ps)),
 					A3(
@@ -6507,7 +6412,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (!p.P) && (p.ak === 1);
+							return (!p.at) && (p.al === 1);
 						},
 						ps)),
 					A3(
@@ -6517,7 +6422,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (p.P === 1) && (!p.ak);
+							return (p.at === 1) && (!p.al);
 						},
 						ps)),
 					A3(
@@ -6527,7 +6432,7 @@ var $author$project$View$renderPlayersDivided = F4(
 					A2(
 						$Gizra$elm_all_set$EverySet$filter,
 						function (p) {
-							return (p.P === 1) && (p.ak === 1);
+							return (p.at === 1) && (p.al === 1);
 						},
 						ps))
 				]));
@@ -6549,14 +6454,14 @@ var $author$project$View$renderScore = function (ps) {
 		A2(
 			$elm$core$List$filter,
 			function (p) {
-				return p.aw;
+				return p.ax;
 			},
 			ps));
 	var oppScore = $elm$core$List$length(
 		A2(
 			$elm$core$List$filter,
 			function (p) {
-				return !p.aw;
+				return !p.ax;
 			},
 			ps));
 	return A2(
@@ -6632,7 +6537,7 @@ var $author$project$View$renderPoints = function (game) {
 			$elm$core$List$reverse(
 				$author$project$View$enumerate(game.K))));
 };
-var $author$project$View$emptyStats = {aE: 0, aQ: 0};
+var $author$project$View$emptyStats = {aF: 0, aR: 0};
 var $elm$core$Dict$get = F2(
 	function (targetKey, dict) {
 		get:
@@ -6665,7 +6570,7 @@ var $elm$core$Dict$get = F2(
 		}
 	});
 var $author$project$View$percent = function (st) {
-	return ((st.aQ > 0) || (st.aE > 0)) ? (st.aQ / (st.aQ + st.aE)) : 0;
+	return ((st.aR > 0) || (st.aF > 0)) ? (st.aR / (st.aR + st.aF)) : 0;
 };
 var $author$project$Messages$FlipPlayerExcludeFromStats = function (a) {
 	return {$: 14, a: a};
@@ -6681,18 +6586,18 @@ var $author$project$View$renderPlayerStats = F3(
 					$elm$html$Html$Attributes$class('stats-item'),
 					(player.P === 1) ? $elm$html$Html$Attributes$class('domcolored') : $elm$html$Html$Attributes$class('dowcolored'),
 					$elm$html$Html$Events$onClick(
-					$author$project$Messages$FlipPlayerExcludeFromStats(player.af)),
-					A2($Gizra$elm_all_set$EverySet$member, player.af, excludedPlayersFromStats) ? A2($elm$html$Html$Attributes$style, 'opacity', '50%') : $elm$html$Html$Attributes$classList(_List_Nil)
+					$author$project$Messages$FlipPlayerExcludeFromStats(player.ag)),
+					A2($Gizra$elm_all_set$EverySet$member, player.ag, excludedPlayersFromStats) ? A2($elm$html$Html$Attributes$style, 'opacity', '50%') : $elm$html$Html$Attributes$classList(_List_Nil)
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(player.af),
+					$elm$html$Html$text(player.ag),
 					$elm$html$Html$text(' '),
 					$elm$html$Html$text(
-					$elm$core$String$fromInt(stats.aQ)),
+					$elm$core$String$fromInt(stats.aR)),
 					$elm$html$Html$text('/'),
 					$elm$html$Html$text(
-					$elm$core$String$fromInt(stats.aQ + stats.aE)),
+					$elm$core$String$fromInt(stats.aR + stats.aF)),
 					$elm$html$Html$text(' | '),
 					$elm$html$Html$text(
 					$elm$core$String$fromInt(
@@ -6717,7 +6622,7 @@ var $author$project$View$renderStats = F2(
 				A2(
 					$elm$core$List$sortBy,
 					function (p) {
-						var _v0 = A2($elm$core$Dict$get, p.af, stats);
+						var _v0 = A2($elm$core$Dict$get, p.ag, stats);
 						if (!_v0.$) {
 							var st = _v0.a;
 							return $author$project$View$percent(st);
@@ -6761,7 +6666,7 @@ var $author$project$View$renderStats = F2(
 								A2(
 									$elm$core$Maybe$withDefault,
 									$author$project$View$emptyStats,
-									A2($elm$core$Dict$get, p.af, stats)),
+									A2($elm$core$Dict$get, p.ag, stats)),
 								p);
 						},
 						dows)),
@@ -6777,7 +6682,7 @@ var $author$project$View$renderStats = F2(
 								A2(
 									$elm$core$Maybe$withDefault,
 									$author$project$View$emptyStats,
-									A2($elm$core$Dict$get, p.af, stats)),
+									A2($elm$core$Dict$get, p.ag, stats)),
 								p);
 						},
 						doms))
@@ -6838,7 +6743,7 @@ var $author$project$View$renderGame = F2(
 									$author$project$View$isLineInvalid(game),
 									A2(
 										$elm$core$List$cons,
-										{o: game.I, aw: true},
+										{o: game.I, ax: true},
 										game.K),
 									$author$project$Messages$RemovePlayer,
 									game.o),
@@ -6894,7 +6799,7 @@ var $author$project$View$renderGame = F2(
 									false,
 									A2(
 										$elm$core$List$cons,
-										{o: game.I, aw: true},
+										{o: game.I, ax: true},
 										game.K),
 									$author$project$Messages$PickPlayer,
 									A2($Gizra$elm_all_set$EverySet$diff, game.J, game.o))
@@ -7012,7 +6917,8 @@ var $author$project$View$view = function (model) {
 						model.H ? 'Games' : 'Overview',
 						$author$project$Messages$Overview),
 						A2($author$project$View$renderButton, 'Export', $author$project$Messages$ExportState),
-						A2($author$project$View$renderButton, 'Import', $author$project$Messages$ImportState)
+						A2($author$project$View$renderButton, 'Import', $author$project$Messages$ImportState),
+						model.Y ? A2($author$project$View$renderButton, 'Wipe!', $author$project$Messages$ClearConfirm) : A2($author$project$View$renderButton, 'Clear', $author$project$Messages$Clear)
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil),
 				model.H ? A2(
@@ -7060,7 +6966,7 @@ var $elm$core$Result$withDefault = F2(
 	});
 var $author$project$Main$main = $elm$browser$Browser$element(
 	{
-		aI: function (value) {
+		aJ: function (value) {
 			return _Utils_Tuple2(
 				A2(
 					$elm$core$Result$withDefault,
@@ -7068,8 +6974,8 @@ var $author$project$Main$main = $elm$browser$Browser$element(
 					A2($elm$json$Json$Decode$decodeValue, $author$project$Model$decode, value)),
 				$elm$core$Platform$Cmd$none);
 		},
-		aP: $author$project$Main$subscriptions,
-		aT: $author$project$Update$update,
-		aU: $author$project$View$view
+		aQ: $author$project$Main$subscriptions,
+		aU: $author$project$Update$update,
+		aV: $author$project$View$view
 	});
 _Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));
